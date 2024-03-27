@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { AddCircleOutline, AddCircleOutlineOutlined } from '@mui/icons-material';
 
 function Copyright(props) {
     return (
@@ -30,7 +31,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function LoginPage() {
+export default function RegistrationPage() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -53,12 +54,21 @@ export default function LoginPage() {
                     }}
                 >
                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
+                        <AddCircleOutlineOutlined />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Войдите в аккаунт
+                        Регистрация
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="name"
+                            label="Логин"
+                            name="name"
+                            autoFocus
+                        />
                         <TextField
                             margin="normal"
                             required
@@ -67,7 +77,6 @@ export default function LoginPage() {
                             label="Адрес электронной почты"
                             name="email"
                             autoComplete="email"
-                            autoFocus
                         />
                         <TextField
                             margin="normal"
@@ -77,6 +86,16 @@ export default function LoginPage() {
                             label="Пароль"
                             type="password"
                             id="password"
+                            autoComplete="current-password"
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password2"
+                            label="Повторите пароль"
+                            type="password"
+                            id="password2"
                             autoComplete="current-password"
                         />
                         <FormControlLabel
@@ -89,7 +108,7 @@ export default function LoginPage() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Войти
+                            Зарегистрироваться
                         </Button>
                         <Grid container>
                             <Grid item xs>
@@ -98,8 +117,8 @@ export default function LoginPage() {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="/registration" variant="body2">
-                                    {"Создать аккаунт"}
+                                <Link href="/login" variant="body2">
+                                    {"Войти в существующий аккаунт"}
                                 </Link>
                             </Grid>
                         </Grid>
