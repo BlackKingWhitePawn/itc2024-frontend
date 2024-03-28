@@ -12,11 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios';
-import URLS from '../urls';
-import userStore from '../stores/user';
-import { useNavigate } from 'react-router-dom';
-import { FormHelperText } from '@mui/material';
+import { AddCircleOutline, AddCircleOutlineOutlined } from '@mui/icons-material';
 
 function Copyright(props) {
     return (
@@ -35,32 +31,13 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function LoginPage() {
-    const [login, setLogin] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const navigate = useNavigate()
-    const [error, setError] = React.useState('');
-
-    const handleSubmit = async (event) => {
+export default function RegistrationPage() {
+    const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
-            email: data.get('login'),
+            email: data.get('email'),
             password: data.get('password'),
-        });
-
-        const response = await axios.post(
-            URLS.LOGIN,
-            {
-                email: data.get('login'),
-                password: data.get('password'),
-            }
-        ).then(res => {
-            userStore.setAuthToken(res.data.token)
-            navigate('/profile')
-        }).catch(err => {
-            setError('Произошла ошибка при входе')
-            console.log(err);
         });
     };
 
@@ -77,21 +54,29 @@ export default function LoginPage() {
                     }}
                 >
                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
+                        <AddCircleOutlineOutlined />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Войдите в аккаунт
+                        Регистрация
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-                            id="login"
+                            id="name"
                             label="Логин"
-                            name="login"
+                            name="name"
                             autoFocus
-                            onChange={(e) => setLogin(e.target.value)}
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Адрес электронной почты"
+                            name="email"
+                            autoComplete="email"
                         />
                         <TextField
                             margin="normal"
@@ -102,7 +87,16 @@ export default function LoginPage() {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password2"
+                            label="Повторите пароль"
+                            type="password"
+                            id="password2"
+                            autoComplete="current-password"
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
@@ -113,26 +107,21 @@ export default function LoginPage() {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
-                            disabled={login === '' || password === ''}
                         >
-                            Войти
+                            Зарегистрироваться
                         </Button>
-                        {/* Кнопки ведущие на страницу регистрации. Невостребованы */}
-                        {/* <Grid container>
+                        <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">
                                     Восстановить пароль
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="/registration" variant="body2">
-                                    {"Создать аккаунт"}
+                                <Link href="/login" variant="body2">
+                                    {"Войти в существующий аккаунт"}
                                 </Link>
                             </Grid>
-                        </Grid> */}
-                        <FormHelperText>
-                            {error}
-                        </FormHelperText>
+                        </Grid>
                     </Box>
                 </Box>
                 {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
