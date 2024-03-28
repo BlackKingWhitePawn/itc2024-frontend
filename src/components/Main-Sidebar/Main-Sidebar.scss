@@ -11,8 +11,11 @@
     background-color: rgba($color: #FFF, $alpha: 0.8);
     z-index: 10;
     border-radius: 20px;
-    p {
-        font-size: 50px;
+
+    h1 {
+        font-size: 30px;
+        font-weight: 400;
+        text-align: center;
     }
 }
 
@@ -53,3 +56,52 @@
         opacity: 1;
     }
 }
+
+
+.cat-name {
+    color: #777;
+    font-size: 22px;
+    font-weight: 500;
+    margin-left: 16px;
+}
+
+.cat-container {
+    background-color: #F1F4F7;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+
+
+    // ПРОСТИТЕ МЕНЯ ЗА ЭТОТ ПИЗДЕЦ
+    .logo1 > path {
+        stroke: #000;
+     }
+     .logo2 > path {
+        stroke: #000;
+     }
+     .logo3 > path {
+        stroke: #000;
+     }
+     .logo4 > path {
+        stroke: #000;
+     }
+    
+     .logo1, .logo2, .logo3, .logo4 {
+        width: 20px;
+        height: 20px;
+        padding: 25px;
+        border-radius: 10px;
+     }
+    
+
+    p {
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0;
+    }
+}
+

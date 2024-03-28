@@ -21,10 +21,12 @@ function MapPage() {
   const [marker, setMarker] = useState(-1);
   const [mainSidebarOpen, setMainSidebarOpen] = useState(false);
 
+  const [catChosen, setCatChosen] = useState(1);
+
   return (
     <div>
-      <NavSidebar markers={markers} marker={marker} open={mainSidebarOpen} setOpen={setMainSidebarOpen} />
-      <MainSidebar open={mainSidebarOpen} />
+      <NavSidebar chosen={catChosen} setChosen={setCatChosen} open={mainSidebarOpen} setOpen={setMainSidebarOpen} />
+      <MainSidebar category={catChosen} open={mainSidebarOpen} />
       <MapComponent markers={markers} currMarker={marker} setMarker={setMarker} />
       <div className='button-container'>
         <Fab onClick={() => navigation('/profile')}>

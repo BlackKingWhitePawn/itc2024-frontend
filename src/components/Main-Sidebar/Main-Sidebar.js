@@ -1,9 +1,45 @@
 import './Main-Sidebar.scss'
+import { ReactComponent as Logo } from '../../assets/icons/user.svg'
+import Dropdown from '../Dropdown/Dropdown';
+import { useState } from 'react';
 
-function MainSidebar({open}) {
+function MainSidebar({open, category}) {
+    const [filters, setFilters] = useState({id: 1, label: "По дате последнего обслуживания"}); // contains dropdown object
+    const [dropdownOpen, setDropdownOpen] = useState(-1); //contains id of open atm dropdown
+    const filtersLabels = [
+        {id: 1, label: "По дате последнего обслуживания"},
+        {id: 2, label: "По рейтингу истории"},
+        {id: 3, label: "По рейтингу предсказания"}
+    ];
+
+    const catOptions = {
+        1: "Объекты ИТС",
+        2: "Аналитика",
+        3: "История отчетов"
+    };
+
     return(
         <div className={open ? "main-sidebar sidebar-open" : "main-sidebar sidebar-closed"}>
-            <p>Привет, мир!</p>
+            <h1>{catOptions[category]}</h1>
+            <Dropdown id={1} selectedOption={filters} setSelectedOption={setFilters} isOpen={dropdownOpen} setIsOpen={setDropdownOpen} labels={filtersLabels} />
+            <p className='cat-name'>УДС</p>
+            <div className='cat-container'>
+                <Logo style={{"backgroundColor": "#EFE9F5"}} className="logo1" />
+                <p>Камеры</p>
+            </div>
+            <div className='cat-container'>
+                <Logo style={{"backgroundColor": "#F5E8EB"}} className="logo2" />
+                <p>Мониторинг</p>
+            </div>
+            <p className='cat-name'>МСДИДИ</p>
+            <div className='cat-container'>
+                <Logo style={{"backgroundColor": "#EFE9F5"}} className="logo3" />
+                <p>ПОДД</p>
+            </div>
+            <div className='cat-container'>
+                <Logo style={{"backgroundColor": "#F4EDEA"}} className="logo4" />
+                <p>Проектный</p>
+            </div>
         </div>
     )
 }
