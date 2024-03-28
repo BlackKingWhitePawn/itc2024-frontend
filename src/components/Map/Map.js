@@ -49,7 +49,7 @@ const MapComponent = ({markers, currMarker, setMarker}) => {
 
 
     const draw = async () => {
-        await fetchData("улица Ленина").then(roadCoordinates => {
+        await fetchData("улица Луначарского").then(roadCoordinates => {
             roadCoordinates.forEach(coordSet => {
                 if (mapRef.current && zoomInButtonRef.current && zoomOutButtonRef.current) {
 

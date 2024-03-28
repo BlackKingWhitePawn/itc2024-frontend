@@ -1,6 +1,10 @@
 import MapComponent from "../components/Map/Map";
-import MapSidebar from "../components/Map-Sidebar/Map-Sidebar";
+import NavSidebar from "../components/Nav-Sidebar/Nav-Sidebar";
 import { useState } from "react";
+
+import '../components/Nav-Sidebar/Nav-Sidebar.scss'
+import user from '../assets/icons/user.svg'
+import MainSidebar from "../components/Main-Sidebar/Main-Sidebar";
 
 function MapPage() {
 
@@ -10,11 +14,16 @@ function MapPage() {
   ]
 
   const [marker, setMarker] = useState(-1);
+  const [mainSidebarOpen, setMainSidebarOpen] = useState(false);
 
     return (
       <div>
-        <MapSidebar markers={markers} marker={marker}/>
+        <NavSidebar markers={markers} marker={marker} open={mainSidebarOpen} setOpen={setMainSidebarOpen}/>
+        <MainSidebar open={mainSidebarOpen}/>
         <MapComponent markers={markers} currMarker={marker} setMarker={setMarker} />
+        <div className='user-container'>
+          <img src={user}/>
+        </div>
       </div>
     );
   }
