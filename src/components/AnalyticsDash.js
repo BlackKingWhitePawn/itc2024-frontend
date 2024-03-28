@@ -35,9 +35,10 @@ const Accounts = [
 
 export default function AnalyticsDash() {
   const navigate = useNavigate()
+  const pageName = "Аккаунты"
 
   return (
-    <Layout>
+    <Layout pageName={pageName}>
        <Grid container spacing={2}>
         {Accounts.map((account, index) => (
           <Grid item xs={12} sm={6} md={3} key={index} sx={{ display: 'flex' }}>

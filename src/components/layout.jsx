@@ -86,7 +86,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Layout({ children }) {
+export default function Layout({ children, pageName}) {
     const [open, setOpen] = React.useState(true);
     const toggleDrawer = () => {
       setOpen(!open);
@@ -122,7 +122,7 @@ export default function Layout({ children }) {
                 noWrap
                 sx={{ flexGrow: 1 }}
               >
-                Аккаунты
+                {pageName}
               </Typography>
               {/* <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
