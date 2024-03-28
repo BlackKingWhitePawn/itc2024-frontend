@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8100/api';
+const API_URL = 'http://localhost:8080/api';
 
 const URLS = {
     API_URL: API_URL,
