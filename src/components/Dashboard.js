@@ -17,7 +17,7 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './reusable/listItems';
+import { MainListItems, getSecondaryListItems } from './reusable/listItems';
 import { ProfileEdit } from './ProfileEdit';
 import { ProfileCard } from './ProfileCard';
 import logotip from "../assets/icons/logotip.svg"
@@ -99,7 +99,7 @@ export default function Dashboard() {
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              backgroundColor:"#D76223",
+              backgroundColor: "#D76223",
               pr: '24px', // keep right padding when drawer closed
             }}
           >
@@ -142,15 +142,19 @@ export default function Dashboard() {
           >
             <img src={logotip} ></img>
             <IconButton onClick={toggleDrawer}>
-              
+
               <ChevronLeftIcon />
             </IconButton>
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            <MainListItems item="Карты" />
+            <MainListItems item="Объекты" />
+            <MainListItems item="Поставщики" />
+            <MainListItems item="Аналитика" />
+            <MainListItems item="Профиль" />
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            {getSecondaryListItems()}
           </List>
         </Drawer>
         <Box

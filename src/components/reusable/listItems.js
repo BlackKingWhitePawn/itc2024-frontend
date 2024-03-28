@@ -13,72 +13,67 @@ import profileCircle from "../../assets/icons/profile-circle.svg";
 import TrafficIcon from '@mui/icons-material/Traffic';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ExploreIcon from '@mui/icons-material/Explore';
+import { useNavigate } from 'react-router';
 
+export function MainListItems({ item }) {
+  const navigate = useNavigate();
 
-export const mainListItems = (
-  <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <ExploreIcon />
-      </ListItemIcon>
-      <ListItemText primary="Карты" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <TrafficIcon />
-      </ListItemIcon>
-      <ListItemText primary="Объекты" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Поставщики" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Аналитика" />
-    </ListItemButton>
-    {/* <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItemButton> */}
+  if (item === 'Карты') return <ListItemButton onClick={() => navigate("/map")}>
+    <ListItemIcon>
+      <ExploreIcon />
+    </ListItemIcon>
+    <ListItemText primary="Карты" />
+  </ListItemButton>
+  else if (item === 'Объекты') return <ListItemButton onClick={() => navigate("/#")}>
+    <ListItemIcon>
+      <TrafficIcon />
+    </ListItemIcon>
+    <ListItemText primary="Объекты" />
+  </ListItemButton>
+  else if (item === 'Поставщики') return <ListItemButton onClick={() => navigate("/#")}>
+    <ListItemIcon>
+      <PeopleIcon />
+    </ListItemIcon>
+    <ListItemText primary="Поставщики" />
+  </ListItemButton>
+  else if (item === 'Аналитика') return <ListItemButton onClick={() => navigate("/#")}>
+    <ListItemIcon>
+      <BarChartIcon />
+    </ListItemIcon>
+    <ListItemText primary="Аналитика" />
+  </ListItemButton>
+  else if (item === 'Профиль') return <ListItemButton onClick={() => navigate("/profile")}>
+    <ListItemIcon>
+      <img src={profileCircle}></img>
+    </ListItemIcon>
+    <ListItemText primary="Профиль" />
+  </ListItemButton>
+}
 
-    <ListItemButton>
-      <ListItemIcon>
-        <img src={profileCircle}></img>
-      </ListItemIcon>
-      <ListItemText primary="Профиль" />
-    </ListItemButton>
-  </React.Fragment>
-);
-
-export const secondaryListItems = (
-  <React.Fragment>
-    <ListSubheader component="div" inset>
-      {/* Saved reports */}
-    </ListSubheader>
-    {/* <ListItemButton>
+export function getSecondaryListItems() {
+  return (
+    <React.Fragment>
+      <ListSubheader component="div" inset>
+        {/* Saved reports */}
+      </ListSubheader>
+      {/* <ListItemButton>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Current month" />
     </ListItemButton> */}
-    {/* <ListItemButton>
+      {/* <ListItemButton>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Last quarter" />
     </ListItemButton> */}
-    <ListItemButton>
-      <ListItemIcon>
-        <ExitToAppIcon color='error'/>
-      </ListItemIcon>
-      <ListItemText primary="Выход" />
-    </ListItemButton>
-  </React.Fragment>
-);
+      <ListItemButton>
+        <ListItemIcon>
+          <ExitToAppIcon color='error' />
+        </ListItemIcon>
+        <ListItemText primary="Выход" />
+      </ListItemButton>
+    </React.Fragment>
+  )
+}
