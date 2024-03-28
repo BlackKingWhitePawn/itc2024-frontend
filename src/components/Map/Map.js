@@ -3,11 +3,12 @@ import { GoogleMap, LoadScript, Polyline, OverlayView, Marker } from '@react-goo
 import './Map.scss'
 import { Fab } from '@mui/material';
 import { BarChart, BarChartOutlined, BarChartRounded } from '@mui/icons-material';
+import ChartPopup from '../chart-popup';
 
 const containerStyle = {
     width: '100vw',
     height: '100vh',
- 
+
 };
 
 const center = {
@@ -15,7 +16,7 @@ const center = {
     lng: 56.227455
 };
 
-const MapComponent = ({markers, currMarker, setMarker}) => {
+const MapComponent = ({ markers, currMarker, setMarker }) => {
     const mapRef = useRef(null);
     const zoomInButtonRef = useRef(null);
     const zoomOutButtonRef = useRef(null);
@@ -28,7 +29,8 @@ const MapComponent = ({markers, currMarker, setMarker}) => {
             });
 
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                console.log(response);
+                // throw new Error('Network response was not ok');
             }
 
             const jsonData = await response.json();
@@ -38,14 +40,14 @@ const MapComponent = ({markers, currMarker, setMarker}) => {
             var res = [];
             res = ways.map(way => {
                 return way["nodes"].map((node) => {
-                    const currNode =  nodes.filter((newNode) => newNode["id"] == node)[0];
+                    const currNode = nodes.filter((newNode) => newNode["id"] == node)[0];
                     // console.log("bruh", currNode);
-                    return {lat: currNode["lat"], lng: currNode["lon"]};
+                    return { lat: currNode["lat"], lng: currNode["lon"] };
                 });
             });
             return res;
         } catch (error) {
-            
+
         }
     };
 
@@ -66,23 +68,23 @@ const MapComponent = ({markers, currMarker, setMarker}) => {
                     polyline.setMap(mapRef.current);
                 }
             });
-            
+
         });
     }
 
     // NAVIGATION BUTTON LOGIC
     const handleZoomIn = () => {
         if (mapRef.current) {
-          mapRef.current.setZoom(mapRef.current.getZoom() + 1);
+            mapRef.current.setZoom(mapRef.current.getZoom() + 1);
         }
-     };
-    
+    };
 
-     const handleZoomOut = () => {
+
+    const handleZoomOut = () => {
         if (mapRef.current) {
-          mapRef.current.setZoom(mapRef.current.getZoom() - 1);
+            mapRef.current.setZoom(mapRef.current.getZoom() - 1);
         }
-     };
+    };
 
     return (
         <LoadScript
@@ -106,28 +108,28 @@ const MapComponent = ({markers, currMarker, setMarker}) => {
                     draw();
                 }}
                 onClick={() => setMarker(-1)}
-                
+
             >
-            {loaded && markers.map((mark) => {
-                return <Marker
-                    position={{ lat: mark.lat, lng: mark.lng }}
-                    icon={{
-                        url: 'https://4x4photo.ru/wp-content/uploads/2023/05/4df0de19-e32a-491c-bcab-0d849f3cff9a.jpg',
-                        scaledSize: new window.google.maps.Size(60, 60),
-                    }}
-                    label={currMarker == mark.id ? {
-                        text: "Выбран",
-                        fontSize: "20px",
-                        fontWeight: "600",
-                        color: "#F00"
-                    } : {text: " "}}
-                    onClick={() => setMarker(mark.id)}
-                    
-                />
-            })
-            }
+                {loaded && markers.map((mark) => {
+                    return <Marker
+                        position={{ lat: mark.lat, lng: mark.lng }}
+                        icon={{
+                            url: 'https://4x4photo.ru/wp-content/uploads/2023/05/4df0de19-e32a-491c-bcab-0d849f3cff9a.jpg',
+                            scaledSize: new window.google.maps.Size(60, 60),
+                        }}
+                        label={currMarker == mark.id ? {
+                            text: "Выбран",
+                            fontSize: "20px",
+                            fontWeight: "600",
+                            color: "#F00"
+                        } : { text: " " }}
+                        onClick={() => setMarker(mark.id)}
+
+                    />
+                })
+                }
             </GoogleMap>
-             <div style={{
+            <div style={{
                 position: 'absolute',
                 top: '50%',
                 right: '10px',
@@ -145,9 +147,7 @@ const MapComponent = ({markers, currMarker, setMarker}) => {
                 top: '90%',
                 right: '10px',
             }}>
-                <Fab>
-                    <BarChartRounded />
-                </Fab>
+
             </div>
         </LoadScript>
     );

@@ -20,22 +20,6 @@
     }
 }
 
-
-.user-container {
-    position: absolute;
-    top: 30px;
-    right: 10px;
-    border-radius: 20px;
-
-    cursor: pointer;
-
-    img {
-        width: 25px;
-        height: 25px;
-    }
-}
-
-
 @keyframes expandClosed {
     from {
         transform: rotate(-90deg);
