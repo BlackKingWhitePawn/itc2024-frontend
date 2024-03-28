@@ -1,0 +1,22 @@
+.bottom-popup-container {
+    width: 90%;
+    height: 40%;
+}
+
+.button-container {
+    position: absolute;
+    top: 5%;
+    right: 10px;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 90%;
+
+    img {
+        width: 25px;
+        height: 25px;
+    }
+}
