@@ -1,0 +1,55 @@
+
+.main-sidebar {
+    --main-width: 15vw;
+    position: fixed;
+    left: 6vw;
+    top: 5vh;
+    height: 90vh;
+    width: var(--main-width);
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgba($color: #FFF, $alpha: 0.8);
+    z-index: 10;
+    border-radius: 20px;
+    p {
+        font-size: 50px;
+    }
+}
+
+.sidebar-open {
+    animation: ease-in-out .2s sidebarOpened forwards;
+}
+
+.sidebar-closed {
+    animation: ease-in-out .2s sidebarClosed forwards;
+}
+
+
+@keyframes sidebarClosed {
+    from {
+        width: var(--main-width);
+        padding-left: 10px;
+        padding-right: 10px;
+        opacity: 1;
+    }
+    to {
+        width: 0px;
+        padding: 0px;
+        opacity: 0;
+    }
+}
+
+
+@keyframes sidebarOpened {
+    from {
+        width: 0px;
+        padding: 0px;
+        opacity: 0;
+    }
+    to {
+        width: var(--main-width);
+        padding-left: 10px;
+        padding-right: 10px;
+        opacity: 1;
+    }
+}
