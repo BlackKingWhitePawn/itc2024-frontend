@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.50155e75.css",
-    "main.js": "/static/js/main.77e9dc44.js",
+    "main.css": "/static/css/main.6b635a4c.css",
+    "main.js": "/static/js/main.9b601df6.js",
     "static/media/logoITS.svg": "/static/media/logoITS.90a374d89d9133a2c7654ebd3e10c3cc.svg",
     "static/media/logotip.svg": "/static/media/logotip.99a4d9f20c3fdb59a9f44b35fee6f6c6.svg",
     "static/media/profile-circle.svg": "/static/media/profile-circle.72913e69e87201fc7a0069a79bd25f51.svg",
@@ -11,11 +11,11 @@
     "static/media/expand.svg": "/static/media/expand.8349f8f66787ad3f49d1ab1a04047a32.svg",
     "static/media/closeDropDown.svg": "/static/media/closeDropDown.dc93b4885b3b6c46137e851dbab54dc9.svg",
     "static/media/openDropDown.svg": "/static/media/openDropDown.7657f9493a92c28c527379990118886e.svg",
-    "main.50155e75.css.map": "/static/css/main.50155e75.css.map",
-    "main.77e9dc44.js.map": "/static/js/main.77e9dc44.js.map"
+    "main.6b635a4c.css.map": "/static/css/main.6b635a4c.css.map",
+    "main.9b601df6.js.map": "/static/js/main.9b601df6.js.map"
   },
   "entrypoints": [
-    "static/css/main.50155e75.css",
-    "static/js/main.77e9dc44.js"
+    "static/css/main.6b635a4c.css",
+    "static/js/main.9b601df6.js"
   ]
 }
