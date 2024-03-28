@@ -13,6 +13,7 @@ import profileCircle from "../../assets/icons/profile-circle.svg";
 import TrafficIcon from '@mui/icons-material/Traffic';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ExploreIcon from '@mui/icons-material/Explore';
+import { useNavigate } from 'react-router-dom';
 
 
 export const mainListItems = (
@@ -21,7 +22,7 @@ export const mainListItems = (
       <ListItemIcon>
         <ExploreIcon />
       </ListItemIcon>
-      <ListItemText primary="Карты" />
+      <ListItemText primary="Карта" onClick={() => window.open("http://localhost:3000/map")}/>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
