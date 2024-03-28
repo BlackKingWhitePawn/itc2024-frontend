@@ -166,25 +166,25 @@ export default function Dashboard() {
               </ListItemIcon>
               <ListItemText primary="Карты" />
             </ListItemButton>
-            <ListItemButton onClick={() => navigate("/map")}>
+            <ListItemButton onClick={() => navigate("/accounts")}>
               <ListItemIcon>
                 <TrafficIcon />
               </ListItemIcon>
               <ListItemText primary="Управления" />
             </ListItemButton>
-            <ListItemButton onClick={() => navigate("/map")}>
+            <ListItemButton onClick={() => navigate("/companies")}>
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
               <ListItemText primary="Подрядчики" />
             </ListItemButton>
-            <ListItemButton onClick={() => navigate("/map")}>
+            <ListItemButton onClick={() => navigate("/analysis")}>
               <ListItemIcon>
                 <BarChartIcon />
               </ListItemIcon>
               <ListItemText primary="Аналитика" />
             </ListItemButton>
-            <ListItemButton onClick={() => navigate("/map")}>
+            <ListItemButton onClick={() => navigate("/profile")}>
               <ListItemIcon>
                 <AccountCircle />
               </ListItemIcon>
