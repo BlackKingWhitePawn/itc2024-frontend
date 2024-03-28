@@ -22,7 +22,7 @@ import { ProfileEdit } from './ProfileEdit';
 import { ProfileCard } from './ProfileCard';
 import logotip from "../assets/icons/logotip.svg"
 import Layout from '../components/layout'
-
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -87,6 +87,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const defaultTheme = createTheme();
 
 export default function Dashboard() {
+  const navigator = useNavigate();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);

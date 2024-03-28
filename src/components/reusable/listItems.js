@@ -16,13 +16,15 @@ import ExploreIcon from '@mui/icons-material/Explore';
 import { useNavigate } from 'react-router-dom';
 
 
+
+
 export const mainListItems = (
   <React.Fragment>
     <ListItemButton>
       <ListItemIcon>
         <ExploreIcon />
       </ListItemIcon>
-      <ListItemText primary="Карта" onClick={() => window.open("http://localhost:3000/map")}/>
+      <ListItemText primary="Карта"/>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
@@ -42,13 +44,6 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Аналитика" />
     </ListItemButton>
-    {/* <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItemButton> */}
-
     <ListItemButton>
       <ListItemIcon>
         <img src={profileCircle}></img>
@@ -61,20 +56,7 @@ export const mainListItems = (
 export const secondaryListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
-      {/* Saved reports */}
     </ListSubheader>
-    {/* <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton> */}
-    {/* <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton> */}
     <ListItemButton>
       <ListItemIcon>
         <ExitToAppIcon color='error'/>
