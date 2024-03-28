@@ -9,6 +9,7 @@ import Root from "./pages/root";
 import ErrorPage from "./pages/error-page";
 import LoginPage from "./pages/login-page";
 import UserPage from "./pages/user-page";
+import RegistrationPage from "./pages/registration-page";
 
 
 const router = createBrowserRouter([
