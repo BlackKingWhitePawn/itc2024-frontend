@@ -40,6 +40,8 @@ import profileCircle from "../assets/icons/profile-circle.svg";
 import TrafficIcon from '@mui/icons-material/Traffic';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ExploreIcon from '@mui/icons-material/Explore';
+import { observer } from 'mobx-react-lite';
+import appStore from '../stores/app';
 
 function Copyright(props) {
   return (
@@ -103,18 +105,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Layout({ children, pageName }) {
+const Layout = observer(({ children, pageName }) => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
-    setOpen(!open);
+    appStore.toggleSidebar();
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute" open={appStore.isSideBarOpened}>
           <Toolbar
             sx={{
               backgroundColor: "#D76223",
@@ -128,7 +130,7 @@ export default function Layout({ children, pageName }) {
               onClick={toggleDrawer}
               sx={{
                 marginRight: '36px',
-                ...(open && { display: 'none' }),
+                ...(appStore.isSideBarOpened && { display: 'none' }),
               }}
             >
               <MenuIcon />
@@ -149,7 +151,7 @@ export default function Layout({ children, pageName }) {
               </IconButton> */}
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={appStore.isSideBarOpened}>
           <Toolbar
             sx={{
               display: 'flex',
@@ -166,8 +168,6 @@ export default function Layout({ children, pageName }) {
           </Toolbar>
           <Divider />
           <List component="nav">
-
-
             <ListItemButton onClick={() => navigate("/map")}>
               <ListItemIcon>
                 <ExploreIcon />
@@ -198,14 +198,10 @@ export default function Layout({ children, pageName }) {
               </ListItemIcon>
               <ListItemText primary="Профиль" />
             </ListItemButton>
-
-
             <Divider sx={{ my: 1 }} />
-
             <React.Fragment>
               <ListSubheader component="div" inset>
               </ListSubheader>
-
               <ListItemButton>
                 <ListItemIcon>
                   <ExitToAppIcon color='error' />
@@ -213,7 +209,6 @@ export default function Layout({ children, pageName }) {
                 <ListItemText primary="Выход" onClick={() => navigate("/login")} />
               </ListItemButton>
             </React.Fragment>
-
           </List>
         </Drawer>
         <Box
@@ -229,7 +224,6 @@ export default function Layout({ children, pageName }) {
           }}
         >
           <Toolbar />
-
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             {children}
           </Container>
@@ -237,4 +231,6 @@ export default function Layout({ children, pageName }) {
       </Box>
     </ThemeProvider>
   );
-}
+})
+
+export default Layout

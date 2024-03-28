@@ -20,6 +20,17 @@ const bull = (
 
 function CompanyCard({ id, name, tasks, region, statistics, metrics }) {
     const [statShowed, setStatShowed] = React.useState(false);
+    // const magicValue1 = ((Math.random() * 100 - 50) / 10).toFixed(2)
+    // const magicValue2 = ((Math.random() * 100 - 50) / 10).toFixed(2)
+
+    function translateMetrics(name) {
+        const t = {
+            'pointer_regulary': 'Качество регулярного обслуживания',
+            'pointer_incidents': 'Качество инцидентного обслуживания'
+        }
+
+        return t[name]
+    }
 
     return (
         <Card style={{ width: '100%', height: 'min-content' }} className='company-card'>
@@ -41,7 +52,13 @@ function CompanyCard({ id, name, tasks, region, statistics, metrics }) {
                 {statShowed && <Stack className='company-card__stat'>
                     {Object.entries(statistics).map(([title, value]) => (
                         <Box key={title}>
-                            <p><span className='company-card__stat-title'>{title}:</span> <span className='company-card__stat-value'>{value}</span></p>
+                            <p>
+                                <span className='company-card__stat-title'>{translateMetrics(title)}:</span>
+                                {' '}
+                                <span className='company-card__stat-value'>{value}</span>
+                                {' '}
+                                {' · '}<span className='company-card__stat-std'>+12.43%</span>
+                            </p>
                         </Box>
                     ))}
                 </Stack>}
