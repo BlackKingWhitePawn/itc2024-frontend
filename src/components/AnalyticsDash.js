@@ -17,12 +17,13 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './reusable/listItems';
+import { MainListItems, getSecondaryListItems, } from './reusable/listItems';
 import { ProfileEdit } from './ProfileEdit';
 import { ProfileCard } from './ProfileCard';
 import logotip from "../assets/icons/logotip.svg"
 import Layout from './layout'
 import { Avatar, Card, CardHeader, CardContent } from '@mui/material';
+import { useNavigate } from 'react-router';
 
 
 
@@ -208,6 +209,8 @@ const defaultTheme = createTheme();
 
 export default function AnalyticsDash() {
   const [open, setOpen] = React.useState(true);
+  const navigate = useNavigate();
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -219,7 +222,7 @@ export default function AnalyticsDash() {
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              backgroundColor:"#D76223",
+              backgroundColor: "#D76223",
               pr: '24px', // keep right padding when drawer closed
             }}
           >
@@ -262,15 +265,19 @@ export default function AnalyticsDash() {
           >
             <img src={logotip} ></img>
             <IconButton onClick={toggleDrawer}>
-              
+
               <ChevronLeftIcon />
             </IconButton>
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            <MainListItems item="Карты" />
+            <MainListItems item="Объекты" />
+            <MainListItems item="Поставщики" />
+            <MainListItems item="Аналитика" />
+            <MainListItems item="Профиль" />
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            {getSecondaryListItems()}
           </List>
         </Drawer>
         <Box
@@ -286,48 +293,48 @@ export default function AnalyticsDash() {
           }}
         >
           <Toolbar />
-          
+
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={2}>
-        {userTestimonials.map((testimonial, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index} sx={{ display: 'flex' }}>
-            <Card
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                flexGrow: 1,
-                p: 1,
-              }}
-            >
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  {testimonial.testimonial}
-                </Typography>
-              </CardContent>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  pr: 2,
-                }}
-              >
-                <CardHeader
-                  avatar={testimonial.avatar}
-                  title={testimonial.name}
-                  subheader={testimonial.occupation}
-                />
-                <img
-                  // src={logos[index]}
-                  alt={`Logo ${index + 1}`}
-                  // style={logoStyle}
-                />
-              </Box>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+            <Grid container spacing={2}>
+              {userTestimonials.map((testimonial, index) => (
+                <Grid item xs={12} sm={6} md={3} key={index} sx={{ display: 'flex' }}>
+                  <Card
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      flexGrow: 1,
+                      p: 1,
+                    }}
+                  >
+                    <CardContent>
+                      <Typography variant="body2" color="text.secondary">
+                        {testimonial.testimonial}
+                      </Typography>
+                    </CardContent>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        pr: 2,
+                      }}
+                    >
+                      <CardHeader
+                        avatar={testimonial.avatar}
+                        title={testimonial.name}
+                        subheader={testimonial.occupation}
+                      />
+                      <img
+                        // src={logos[index]}
+                        alt={`Logo ${index + 1}`}
+                      // style={logoStyle}
+                      />
+                    </Box>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
           </Container>
         </Box>
       </Box>
