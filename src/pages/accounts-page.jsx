@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import userStore from '../stores/user'
 import { useNavigate } from 'react-router-dom'
-import AnalyticsDash from '../components/AnalyticsDash'
+import AccountComponents from '../components/AccountComponents'
 
 
 function AnalysPage() {
@@ -14,7 +14,7 @@ function AnalysPage() {
 
     return (
         <div>
-            <AnalyticsDash />
+            <AccountComponents />
         </div>
     )
 }

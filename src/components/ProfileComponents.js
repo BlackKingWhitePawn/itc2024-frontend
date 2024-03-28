@@ -21,11 +21,11 @@ import { mainListItems, secondaryListItems } from './reusable/listItems';
 import { ProfileEdit } from './ProfileEdit';
 import { ProfileCard } from './ProfileCard';
 import logotip from "../assets/icons/logotip.svg"
-import Layout from '../components/layout'
+import Layout from './layout'
 import { useNavigate } from 'react-router-dom';
 
 
-export default function Dashboard() {
+export default function ProfileComponents() {
   const pageName = "Профиль"
   return (
     <Layout pageName={pageName}>

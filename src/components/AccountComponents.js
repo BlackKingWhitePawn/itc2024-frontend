@@ -33,7 +33,7 @@ const Accounts = [
   }
 ];
 
-export default function AnalyticsDash() {
+export default function AccountComponents() {
   const navigate = useNavigate()
   const pageName = "Аккаунты"
 
@@ -42,7 +42,7 @@ export default function AnalyticsDash() {
        <Grid container spacing={2}>
         {Accounts.map((account, index) => (
           <Grid item xs={12} sm={6} md={3} key={index} sx={{ display: 'flex' }}>
-            <Card style={{cursor:"pointer"}} onClick={async event => { navigate(`/new/${account.id}`); }}
+            <Card style={{cursor:"pointer"}} onClick={async event => { navigate(`/accounts/${account.id}`); }}
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
