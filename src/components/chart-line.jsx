@@ -33,7 +33,6 @@ export default function ChartLine({ data, title, ...props }) {
 
     if (!data.ys) return (
         <>
-            {resolveTitle()}
             <LineChart
                 xAxis={[{ data: data.x }]}
                 series={[
@@ -46,7 +45,7 @@ export default function ChartLine({ data, title, ...props }) {
     );
 
     if (Array.isArray(data.ys)) return <>
-        {resolveTitle()} <LineChart
+        <LineChart
             height={300}
             xAxis={[{ data: data.x }]}
             series={data.ys.map((v) => ({ data: v }))}

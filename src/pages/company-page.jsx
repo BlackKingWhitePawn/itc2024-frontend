@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
 import Layout from '../components/layout'
-import { Breadcrumbs, Grid, Typography } from '@mui/material'
+import { Breadcrumbs, Chip, Grid, Typography } from '@mui/material'
 import { Link, useParams } from 'react-router-dom'
 import ChartLine from '../components/chart-line'
 import CompanyCard from '../components/company-card'
 import axios from 'axios'
 import URLS from '../urls'
 import BreadcrumbsNavigation from '../components/navigation';
-
+import { Box, Stack } from '@mui/system'
+import Button from '@mui/material/Button';
 function CompanyPage() {
-    const data = {
+    const data1 = {
         x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
         ys: [[0.8265797781967493,
             0.6984861191688058,
@@ -91,8 +92,101 @@ function CompanyPage() {
             0.47759737688643317,
             0.4285680810412737,
             0.3822266801910584]]
+    }
+
+    const data2 = {
+        x: [0, 23, 46, 69, 92, 115, 138, 161, 184, 207],
+        ys: [[0.19260751875609855,
+            0.3596851976043061,
+            0.48383464345083693,
+            0.6036276698289815,
+            0.7039728805321176,
+            0.8078775080986659,
+            0.9011695485324583,
+            1.00615897265264,
+            1.1536038808345075,
+            1.309475241043004],
+        [0.13836022814492227,
+            0.2583810140034188,
+            0.3475641661582606,
+            0.4336178704315574,
+            0.5057011740107776,
+            0.5803413960969448,
+            0.6473580322173149,
+            0.7227775213830898,
+            0.8286950435369562,
+            0.9406657344995284],
+        [0.1264057554686268,
+            0.23605661620940757,
+            0.31753424799965263,
+            0.39615281957461634,
+            0.4620080481166061,
+            0.530199274653654,
+            0.5914256012602306,
+            0.6603287653622157,
+            0.7570948995666271,
+            0.8593912022775699],
+        [0.10405171266248088,
+            0.19431152569627239,
+            0.26138036366197837,
+            0.3260957477766135,
+            0.3803049037772186,
+            0.4364369515896781,
+            0.48683579711556807,
+            0.5435538809250902,
+            0.6232075482313659,
+            0.7074134094016272],
+        [0.3928225144184465,
+            0.7335769892811909,
+            0.9867794488531222,
+            1.2310970026826142,
+            1.4357507889565042,
+            1.6476639963120774,
+            1.837932860866823,
+            2.052058507864332,
+            2.3527719999660746,
+            2.670671218222767],
+        [0.43984540471346534,
+            0.8213899557578901,
+            1.1049020616506453,
+            1.3784656925485046,
+            1.6076175974057043,
+            1.8448979136610797,
+            2.0579429471372053,
+            2.2977005435229008,
+            2.634410998706727,
+            2.990364400510123],
+        [0.5120794590298037,
+            0.9562835480139277,
+            1.286355714866596,
+            1.6048456084046747,
+            1.8716302154903557,
+            2.1478781305177455,
+            2.3959106990573904,
+            2.6750427280380147,
+            3.067049796640984,
+            3.4814600041411485],
+        [0.141546317980732,
+            0.2643308822099111,
+            0.3555676991961552,
+            0.44360300494695,
+            0.5173462066337738,
+            0.5937052062625898,
+            0.6622650678172927,
+            0.7394212790966025,
+            0.8477778167485868,
+            0.9623269125401158]]
 
     }
+
+    const dataset = [data1, data2]
+
+    const titles = [
+        'Функция выживаемости',
+        'Накопленный риск'
+    ]
+
+    const [selectedChart, setSelectedChart] = React.useState(0);
 
     let { companyId } = useParams();
     const [companyData, setCompanyData] = React.useState(null);
@@ -108,6 +202,10 @@ function CompanyPage() {
             })
     }, []);
 
+    function resolveTitle() {
+        return <Typography style={{ marginLeft: '16px' }} variant='h5'>{titles[selectedChart]}</Typography>
+    }
+
     return (
         <Layout pageName={companyData?.name}>
             <BreadcrumbsNavigation items={[
@@ -118,10 +216,21 @@ function CompanyPage() {
             ]} />
             <Grid container spacing={1}>
                 <Grid container item xs={3}>
-                    <CompanyCard {...companyData} />
+                    <Stack spacing={2} style={{ width: '100%' }}>
+                        <CompanyCard {...companyData} />
+                        <Box display="flex" flexWrap={'wrap'} m={4}>
+                            {[
+                                'Выполнение в срок', 'Компетенции специалистов', 'Нет повторных заявок'
+                            ].map(title => <Chip variant='outlined' color='primary' style={{ marginTop: '8px', fontSize: '12px' }} label={title} />)}
+                        </Box>
+                    </Stack>
                 </Grid>
                 <Grid container item xs>
-                    <ChartLine data={data} height={500} />
+                    <Stack spacing={2} direction={'row'} style={{ width: '100%' }}>
+                        {resolveTitle()}
+                        <Button variant='text' onClick={() => setSelectedChart(Math.abs(selectedChart - 1))}>{titles[Math.abs(selectedChart - 1)]}</Button>
+                    </Stack>
+                    <ChartLine data={dataset[selectedChart]} height={500} title='Функция выживаемости' />
                 </Grid>
             </Grid>
         </Layout>
