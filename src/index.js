@@ -11,10 +11,10 @@ import LoginPage from "./pages/login-page";
 import UserPage from "./pages/user-page";
 import MapPage from "./pages/map-page";
 import RegistrationPage from "./pages/registration-page";
-import AnalysPage from "./pages/analys-page"
 import CompaniesPage from "./pages/companies-page";
 import CompanyPage from "./pages/company-page";
 import './index.scss'
+import AccountsPage from "./pages/accounts-page"
 
 
 const router = createBrowserRouter([
@@ -36,12 +36,12 @@ const router = createBrowserRouter([
     element: <MapPage />,
   },
   {
-    path: "/analysis",
-    element: <AnalysPage />
-  },
-  {
     path: "/companies",
     element: <CompaniesPage />
+  },
+  {
+    path: "/accounts",
+    element: <AccountsPage />
   },
   {
     path: "/company/:companyId",

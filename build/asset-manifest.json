@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.11368829.css",
-    "main.js": "/static/js/main.0075652c.js",
+    "main.css": "/static/css/main.a2c94be8.css",
+    "main.js": "/static/js/main.033dd28a.js",
     "static/media/logoITS.svg": "/static/media/logoITS.90a374d89d9133a2c7654ebd3e10c3cc.svg",
     "static/media/logotip.svg": "/static/media/logotip.99a4d9f20c3fdb59a9f44b35fee6f6c6.svg",
     "static/media/profile-circle.svg": "/static/media/profile-circle.72913e69e87201fc7a0069a79bd25f51.svg",
@@ -9,11 +9,11 @@
     "index.html": "/index.html",
     "static/media/user.svg": "/static/media/user.077781174fa9863df51f828d8de8fdb8.svg",
     "static/media/expand.svg": "/static/media/expand.8349f8f66787ad3f49d1ab1a04047a32.svg",
-    "main.11368829.css.map": "/static/css/main.11368829.css.map",
-    "main.0075652c.js.map": "/static/js/main.0075652c.js.map"
+    "main.a2c94be8.css.map": "/static/css/main.a2c94be8.css.map",
+    "main.033dd28a.js.map": "/static/js/main.033dd28a.js.map"
   },
   "entrypoints": [
-    "static/css/main.11368829.css",
-    "static/js/main.0075652c.js"
+    "static/css/main.a2c94be8.css",
+    "static/js/main.033dd28a.js"
   ]
 }
