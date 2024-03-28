@@ -1,5 +1,9 @@
 .sidebar-container {
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     left: 1vw;
     top: 5vh;
     height: 90vh;
