@@ -9,6 +9,7 @@ import Root from "./pages/root";
 import ErrorPage from "./pages/error-page";
 import LoginPage from "./pages/login-page";
 import UserPage from "./pages/user-page";
+import MapPage from "./pages/map-page";
 import RegistrationPage from "./pages/registration-page";
 
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
     path: "/profile",
     element: <UserPage />,
   },
+  {
+    path: "/map",
+    element: <MapPage/>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

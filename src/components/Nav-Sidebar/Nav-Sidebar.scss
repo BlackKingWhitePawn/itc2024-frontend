@@ -1,0 +1,80 @@
+.sidebar-container {
+    position: fixed;
+    left: 1vw;
+    top: 5vh;
+    height: 90vh;
+    // width: 400px;
+    width: min-content;
+    padding-left: .5vw;
+    padding-right: .5vw;
+    background-color: rgba($color: #FFF, $alpha: 0.8);
+    z-index: 10;
+    border-radius: 20px;
+    p {
+        font-size: 50px;
+    }
+}
+
+
+.user-container {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    border-radius: 20px;
+    background-color: #FFF;
+    padding: 12.5px;
+
+    cursor: pointer;
+
+    img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+
+@keyframes expandClosed {
+    from {
+        transform: rotate(-90deg);
+    }
+    to {
+        transform: rotate(90deg);
+    }
+}
+
+
+@keyframes expandOpened {
+    from {
+        transform: rotate(90deg);
+    }
+    to {
+        transform: rotate(-90deg);
+    }
+}
+
+.expand {
+    background-color: #fff;
+    width: min-content;
+    padding: 12.5px;
+    border-radius: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    img {
+        transform: rotate(90deg);
+        width: 2vw;
+        height: 2vw;
+    }
+}
+
+
+.expand-open {
+    img {
+        animation: linear .2s expandOpened forwards;
+    }
+}
+
+.expand-closed {
+    img {
+        animation: linear .2s expandClosed forwards;
+    }
+}
