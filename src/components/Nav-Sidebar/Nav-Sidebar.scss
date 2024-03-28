@@ -10,6 +10,7 @@
     background-color: rgba($color: #FFF, $alpha: 0.8);
     z-index: 10;
     border-radius: 20px;
+
     p {
         font-size: 50px;
     }
@@ -21,8 +22,6 @@
     top: 30px;
     right: 10px;
     border-radius: 20px;
-    background-color: #FFF;
-    padding: 12.5px;
 
     cursor: pointer;
 
@@ -37,6 +36,7 @@
     from {
         transform: rotate(-90deg);
     }
+
     to {
         transform: rotate(90deg);
     }
@@ -47,6 +47,7 @@
     from {
         transform: rotate(90deg);
     }
+
     to {
         transform: rotate(-90deg);
     }
@@ -59,6 +60,7 @@
     border-radius: 20px;
     margin-top: 10px;
     cursor: pointer;
+
     img {
         transform: rotate(90deg);
         width: 2vw;

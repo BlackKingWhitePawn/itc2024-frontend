@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { GoogleMap, LoadScript, Polyline, OverlayView, Marker } from '@react-google-maps/api';
 import './Map.scss'
+import { Fab } from '@mui/material';
+import { BarChart, BarChartOutlined, BarChartRounded } from '@mui/icons-material';
 
 const containerStyle = {
     width: '100vw',
@@ -87,7 +89,6 @@ const MapComponent = ({markers, currMarker, setMarker}) => {
             googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         >
             <GoogleMap
-                
                 mapContainerStyle={containerStyle}
                 center={center}
                 zoom={15}
@@ -135,8 +136,18 @@ const MapComponent = ({markers, currMarker, setMarker}) => {
                 flexDirection: "column",
                 gap: "5px"
             }}>
+                {/* TODO: material buttons */}
                 <div className='zoomIn' ref={zoomInButtonRef} onClick={handleZoomIn}><p>+</p></div>
                 <div className='zoomOut' ref={zoomOutButtonRef} onClick={handleZoomOut}><p>-</p></div>
+            </div>
+            <div style={{
+                position: 'absolute',
+                top: '90%',
+                right: '10px',
+            }}>
+                <Fab>
+                    <BarChartRounded />
+                </Fab>
             </div>
         </LoadScript>
     );

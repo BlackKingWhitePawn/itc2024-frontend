@@ -5,6 +5,8 @@ import { useState } from "react";
 import '../components/Nav-Sidebar/Nav-Sidebar.scss'
 import user from '../assets/icons/user.svg'
 import MainSidebar from "../components/Main-Sidebar/Main-Sidebar";
+import { Fab } from "@mui/material";
+import { AccountCircleOutlined } from "@mui/icons-material";
 
 function MapPage() {
 
@@ -22,7 +24,9 @@ function MapPage() {
         <MainSidebar open={mainSidebarOpen}/>
         <MapComponent markers={markers} currMarker={marker} setMarker={setMarker} />
         <div className='user-container'>
-          <img src={user}/>
+          <Fab>
+            <AccountCircleOutlined />
+          </Fab>
         </div>
       </div>
     );
