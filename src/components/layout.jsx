@@ -42,16 +42,16 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ExploreIcon from '@mui/icons-material/Explore';
 
 function Copyright(props) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
 }
 
 const drawerWidth = 240;
@@ -103,138 +103,138 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Layout({ children, pageName}) {
-    const navigate = useNavigate();
-    const [open, setOpen] = React.useState(true);
-    const toggleDrawer = () => {
-      setOpen(!open);
-    };
+export default function Layout({ children, pageName }) {
+  const navigate = useNavigate();
+  const [open, setOpen] = React.useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
 
-    return (
-        <ThemeProvider theme={defaultTheme}>
-        <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
-          <AppBar position="absolute" open={open}>
-            <Toolbar
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="absolute" open={open}>
+          <Toolbar
+            sx={{
+              backgroundColor: "#D76223",
+              pr: '24px', // keep right padding when drawer closed
+            }}
+          >
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer}
               sx={{
-                backgroundColor:"#D76223",
-                pr: '24px', // keep right padding when drawer closed
+                marginRight: '36px',
+                ...(open && { display: 'none' }),
               }}
             >
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={toggleDrawer}
-                sx={{
-                  marginRight: '36px',
-                  ...(open && { display: 'none' }),
-                }}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography
-                component="h1"
-                variant="h6"
-                color="inherit"
-                noWrap
-                sx={{ flexGrow: 1 }}
-              >
-                {pageName}
-              </Typography>
-              {/* <IconButton color="inherit">
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1 }}
+            >
+              {pageName}
+            </Typography>
+            {/* <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
                   <NotificationsIcon />
                 </Badge>
               </IconButton> */}
-            </Toolbar>
-          </AppBar>
-          <Drawer variant="permanent" open={open}>
-            <Toolbar
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                px: [1],
-              }}
-            >
-              <img src={logotip} ></img>
-              <IconButton onClick={toggleDrawer}>
-                
-                <ChevronLeftIcon />
-              </IconButton>
-            </Toolbar>
-            <Divider />
-            <List component="nav">
-              
-
-             <ListItemButton onClick={() => navigate("/map")}>
-                        <ListItemIcon>
-                        <ExploreIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Карты" />
-                    </ListItemButton>
-            <ListItemButton onClick={() => navigate("/#")}>
-                        <ListItemIcon>
-                        <TrafficIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Объекты" />
-                    </ListItemButton>
-            <ListItemButton onClick={() => navigate("/accounts")}>
-                        <ListItemIcon>
-                        <PeopleIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Поставщики" />
-                    </ListItemButton>
-            <ListItemButton onClick={() => navigate("/#")}>
-                        <ListItemIcon>
-                        <BarChartIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Аналитика" />
-                    </ListItemButton>
-            <ListItemButton onClick={() => navigate("/profile")}>
-                        <ListItemIcon>
-                        <img src={profileCircle}></img>
-                        </ListItemIcon>
-                        <ListItemText primary="Профиль" />
-                    </ListItemButton>
-
-
-              <Divider sx={{ my: 1 }} />
-             
-              <React.Fragment>
-                <ListSubheader component="div" inset>
-                </ListSubheader>
-
-                <ListItemButton>
-                    <ListItemIcon>
-                    <ExitToAppIcon color='error' />
-                    </ListItemIcon>
-                    <ListItemText primary="Выход" onClick={() => navigate("/login")}/>
-                </ListItemButton>
-                </React.Fragment>
-
-            </List>
-          </Drawer>
-          <Box
-            component="main"
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <Toolbar
             sx={{
-              backgroundColor: (theme) =>
-                theme.palette.mode === 'light'
-                  ? theme.palette.grey[100]
-                  : theme.palette.grey[900],
-              flexGrow: 1,
-              height: '100vh',
-              overflow: 'auto',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              px: [1],
             }}
           >
-            <Toolbar />
-            
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <img src={logotip} ></img>
+            <IconButton onClick={toggleDrawer}>
+
+              <ChevronLeftIcon />
+            </IconButton>
+          </Toolbar>
+          <Divider />
+          <List component="nav">
+
+
+            <ListItemButton onClick={() => navigate("/map")}>
+              <ListItemIcon>
+                <ExploreIcon />
+              </ListItemIcon>
+              <ListItemText primary="Карты" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/#")}>
+              <ListItemIcon>
+                <TrafficIcon />
+              </ListItemIcon>
+              <ListItemText primary="Объекты" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/accounts")}>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Управления" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/#")}>
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Аналитика" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/profile")}>
+              <ListItemIcon>
+                <img src={profileCircle}></img>
+              </ListItemIcon>
+              <ListItemText primary="Профиль" />
+            </ListItemButton>
+
+
+            <Divider sx={{ my: 1 }} />
+
+            <React.Fragment>
+              <ListSubheader component="div" inset>
+              </ListSubheader>
+
+              <ListItemButton>
+                <ListItemIcon>
+                  <ExitToAppIcon color='error' />
+                </ListItemIcon>
+                <ListItemText primary="Выход" onClick={() => navigate("/login")} />
+              </ListItemButton>
+            </React.Fragment>
+
+          </List>
+        </Drawer>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: '100vh',
+            overflow: 'auto',
+          }}
+        >
+          <Toolbar />
+
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             {children}
-            </Container>
-          </Box>
+          </Container>
         </Box>
-      </ThemeProvider>
-    );
+      </Box>
+    </ThemeProvider>
+  );
 }

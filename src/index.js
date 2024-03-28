@@ -44,6 +44,10 @@ const router = createBrowserRouter([
     element: <AccountsPage />
   },
   {
+    path: "/account/:accountInfo",
+    element: <CompaniesPage />
+  },
+  {
     path: "/company/:companyId",
     element: <CompanyPage />
   }
