@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.240f9a60.css",
-    "main.js": "/static/js/main.d6cb5cad.js",
+    "main.css": "/static/css/main.11368829.css",
+    "main.js": "/static/js/main.e19f66af.js",
+    "static/media/logoITS.svg": "/static/media/logoITS.90a374d89d9133a2c7654ebd3e10c3cc.svg",
     "static/media/logotip.svg": "/static/media/logotip.99a4d9f20c3fdb59a9f44b35fee6f6c6.svg",
     "static/media/profile-circle.svg": "/static/media/profile-circle.72913e69e87201fc7a0069a79bd25f51.svg",
     "static/media/i.webp": "/static/media/i.fe0da299936a5be8a612.webp",
     "index.html": "/index.html",
     "static/media/user.svg": "/static/media/user.077781174fa9863df51f828d8de8fdb8.svg",
     "static/media/expand.svg": "/static/media/expand.8349f8f66787ad3f49d1ab1a04047a32.svg",
-    "main.240f9a60.css.map": "/static/css/main.240f9a60.css.map",
-    "main.d6cb5cad.js.map": "/static/js/main.d6cb5cad.js.map"
+    "main.11368829.css.map": "/static/css/main.11368829.css.map",
+    "main.e19f66af.js.map": "/static/js/main.e19f66af.js.map"
   },
   "entrypoints": [
-    "static/css/main.240f9a60.css",
-    "static/js/main.d6cb5cad.js"
+    "static/css/main.11368829.css",
+    "static/js/main.e19f66af.js"
   ]
 }
