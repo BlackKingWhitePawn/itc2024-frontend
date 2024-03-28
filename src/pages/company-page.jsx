@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '../components/layout'
 import { Breadcrumbs, Grid, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ChartLine from '../components/chart-line'
 import CompanyCard from '../components/company-card'
+import axios from 'axios'
+import URLS from '../urls'
 
 function CompanyPage() {
     const data = {
@@ -16,6 +18,20 @@ function CompanyPage() {
             [10, 2, 3, 4, 5, 6, 7],
         ]
     }
+
+    let { companyId } = useParams();
+    const [companyData, setCompanyData] = React.useState(null);
+
+    useEffect(() => {
+        axios
+            .get(`${URLS.COMPANY(companyId)}`)
+            .then(res => {
+                setCompanyData(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, []);
 
     const company = {
         "id": 1,
@@ -56,7 +72,7 @@ function CompanyPage() {
             </Breadcrumbs>
             <Grid container spacing={1}>
                 <Grid container item xs={3}>
-                    <CompanyCard {...company} />
+                    <CompanyCard {...companyData} />
                 </Grid>
                 <Grid container item xs>
                     <ChartLine data={data} height={500} />
