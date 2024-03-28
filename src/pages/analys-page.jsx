@@ -14,7 +14,7 @@ function AnalysPage() {
 
     return (
         <div>
-            <AnalyticsDash/>
+            <AnalyticsDash />
         </div>
     )
 }

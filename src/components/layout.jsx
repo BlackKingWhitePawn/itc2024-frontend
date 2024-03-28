@@ -26,7 +26,6 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Layout({ children }) {
-
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex' }}>
@@ -47,21 +46,6 @@ export default function Layout({ children }) {
                     <Toolbar />
                     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                         <Grid container spacing={3} >
-                            <Grid item xs={8}>
-                                {children}
-                            </Grid>
-                            <Grid item xs={8}>
-                                {children}
-                            </Grid>
-                            <Grid item xs={8}>
-                                {children}
-                            </Grid>
-                            <Grid item xs={8}>
-                                {children}
-                            </Grid>
-                            <Grid item xs={8}>
-                                {children}
-                            </Grid>
                             <Grid item xs={8}>
                                 {children}
                             </Grid>
