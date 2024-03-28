@@ -9,22 +9,16 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import { MainListItems, getSecondaryListItems, } from './reusable/listItems';
-import { ProfileEdit } from './ProfileEdit';
-import { ProfileCard } from './ProfileCard';
+import { getSecondaryListItems, } from './reusable/listItems';
 import logotip from "../assets/icons/logotip.svg"
-import Layout from './layout'
-import { Avatar, Card, CardHeader, CardContent } from '@mui/material';
+import { Avatar, Card, CardHeader, CardContent, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router';
-
+import ExploreIcon from '@mui/icons-material/Explore';
 
 
 const userTestimonials = [
@@ -265,17 +259,41 @@ export default function AnalyticsDash() {
           >
             <img src={logotip} ></img>
             <IconButton onClick={toggleDrawer}>
-
               <ChevronLeftIcon />
             </IconButton>
           </Toolbar>
           <Divider />
           <List component="nav">
-            <MainListItems item="Карты" />
-            <MainListItems item="Объекты" />
-            <MainListItems item="Поставщики" />
-            <MainListItems item="Аналитика" />
-            <MainListItems item="Профиль" />
+            <ListItemButton onClick={() => navigate("/map")}>
+              <ListItemIcon>
+                <ExploreIcon />
+              </ListItemIcon>
+              <ListItemText primary="Карты" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/map")}>
+              <ListItemIcon>
+                <ExploreIcon />
+              </ListItemIcon>
+              <ListItemText primary="Управления" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/map")}>
+              <ListItemIcon>
+                <ExploreIcon />
+              </ListItemIcon>
+              <ListItemText primary="Подрядчики" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/map")}>
+              <ListItemIcon>
+                <ExploreIcon />
+              </ListItemIcon>
+              <ListItemText primary="Аналитика" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/map")}>
+              <ListItemIcon>
+                <ExploreIcon />
+              </ListItemIcon>
+              <ListItemText primary="Профиль" />
+            </ListItemButton>
             <Divider sx={{ my: 1 }} />
             {getSecondaryListItems()}
           </List>

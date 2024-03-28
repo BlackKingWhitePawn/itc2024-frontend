@@ -9,19 +9,30 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import { MainListItems, getSecondaryListItems } from './reusable/listItems';
+import { getSecondaryListItems } from './reusable/listItems';
 import { ProfileEdit } from './ProfileEdit';
 import { ProfileCard } from './ProfileCard';
 import logotip from "../assets/icons/logotip.svg"
-import Layout from '../components/layout'
+import { ListItemIcon, ListItemText } from '@mui/material';
+import { useNavigate } from 'react-router';
+import ExploreIcon from '@mui/icons-material/Explore';
+import ListItemButton from '@mui/material/ListItemButton'
+import ListSubheader from '@mui/material/ListSubheader';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PeopleIcon from '@mui/icons-material/People';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import LayersIcon from '@mui/icons-material/Layers';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import TrafficIcon from '@mui/icons-material/Traffic';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { AccountCircle } from '@mui/icons-material';
 
 
 function Copyright(props) {
@@ -88,6 +99,7 @@ const defaultTheme = createTheme();
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
+  const navigate = useNavigate();
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -148,11 +160,36 @@ export default function Dashboard() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <MainListItems item="Карты" />
-            <MainListItems item="Объекты" />
-            <MainListItems item="Поставщики" />
-            <MainListItems item="Аналитика" />
-            <MainListItems item="Профиль" />
+            <ListItemButton onClick={() => navigate("/map")}>
+              <ListItemIcon>
+                <ExploreIcon />
+              </ListItemIcon>
+              <ListItemText primary="Карты" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/map")}>
+              <ListItemIcon>
+                <TrafficIcon />
+              </ListItemIcon>
+              <ListItemText primary="Управления" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/map")}>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Подрядчики" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/map")}>
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Аналитика" />
+            </ListItemButton>
+            <ListItemButton onClick={() => navigate("/map")}>
+              <ListItemIcon>
+                <AccountCircle />
+              </ListItemIcon>
+              <ListItemText primary="Профиль" />
+            </ListItemButton>
             <Divider sx={{ my: 1 }} />
             {getSecondaryListItems()}
           </List>

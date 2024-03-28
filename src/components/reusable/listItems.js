@@ -15,6 +15,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ExploreIcon from '@mui/icons-material/Explore';
 import { useNavigate } from 'react-router';
 
+// TODO: удалить
 export function MainListItems({ item }) {
   const navigate = useNavigate();
 
