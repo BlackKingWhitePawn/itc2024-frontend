@@ -16,6 +16,27 @@ const center = {
     lng: 56.227455
 };
 
+class LoadScriptOnlyIfNeeded extends LoadScript {
+    componentDidMount() {
+      const cleaningUp = true
+      const isBrowser = typeof document !== "undefined" // require('@react-google-maps/api/src/utils/isbrowser')
+      const isAlreadyLoaded = window.google && window.google.maps && document.querySelector('body.first-hit-completed') // AJAX page loading system is adding this class the first time the app is loaded
+      if (!isAlreadyLoaded && isBrowser) {
+        // @ts-ignore
+        if (window.google && !cleaningUp) {
+          console.error("google api is already presented")
+          return
+        }
+  
+        this.isCleaningUp().then(this.injectScript)
+      }
+  
+      if (isAlreadyLoaded) {
+        this.setState({ loaded: true })
+      }
+    }
+  }
+
 const MapComponent = ({ markers, currMarker, setMarker }) => {
     const mapRef = useRef(null);
     const zoomInButtonRef = useRef(null);
@@ -86,10 +107,23 @@ const MapComponent = ({ markers, currMarker, setMarker }) => {
         }
     };
 
+    // useEffect(() => {
+    //     // Check if the Google Maps API script is already loaded
+    //     if (!window.google || !window.google.maps) {
+    //       // Load the Google Maps API script
+    //       const script = document.createElement('script');
+    //       script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&callback=initMap`;
+    //       script.async = true;
+    //       script.defer = true;
+    //       document.body.appendChild(script);
+    //     }
+    //  }, []);
+    // if (window.google === undefined)
     return (
-        <LoadScript
+        <LoadScriptOnlyIfNeeded
             googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         >
+        {/* // <div> */}
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
@@ -149,7 +183,7 @@ const MapComponent = ({ markers, currMarker, setMarker }) => {
             }}>
 
             </div>
-        </LoadScript>
+         </LoadScriptOnlyIfNeeded>
     );
 };
 
