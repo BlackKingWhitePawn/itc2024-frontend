@@ -1,9 +1,31 @@
 import * as React from 'react';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
-import { styled } from '@mui/system';
+import { Box, styled } from '@mui/system';
 import ChartScatter from './chart-scatter';
+import { Tab, Tabs } from '@mui/material';
+import ChartLine from './chart-line';
+import ChartPie from './chart-pie';
 
 export default function ChartPopup({ isOpened, setIsOpened, isCollapsed }) {
+  const [tabOpened, setTabOpened] = React.useState(0);
+
+  const handleTabChange = (event, newValue) => {
+    setTabOpened(newValue);
+  };
+
+  const resolveChart = () => {
+    switch (tabOpened) {
+      case 0:
+        return <ChartScatter />;
+      case 1:
+        return <ChartLine />;
+      case 2:
+        return <ChartPie />;
+      default:
+        return <ChartScatter />;
+    }
+  }
+
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <div style={{ textAlign: 'center' }}>
@@ -23,8 +45,16 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed }) {
             left: isCollapsed ? '23%' : '6%'
           }}
         >
-          <PopupBody>
-            <ChartScatter />
+          <PopupBody width='100%'>
+            <Box sx={{ borderColor: 'divider' }}>
+              {/* TODO: fix tab indicator */}
+              <Tabs value={tabOpened} onChange={handleTabChange} centered>
+                <Tab label="Точечный" value={0} />
+                <Tab label="Линия" value={1} />
+                <Tab label="Круговая" value={2} />
+              </Tabs>
+            </Box>
+            {resolveChart()}
           </PopupBody>
         </BasePopup>
       </div>
