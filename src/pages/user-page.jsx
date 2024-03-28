@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import userStore from '../stores/user'
 import { useNavigate } from 'react-router-dom'
-import Dashboard from '../components/Dashboard'
+import ProfileComponents from '../components/ProfileComponents'
 import { ProfileCard } from '../components/ProfileCard'
 import { ProfileEdit } from '../components/ProfileEdit'
 
@@ -15,7 +15,7 @@ function UserPage() {
 
     return (
         <div>
-            <Dashboard></Dashboard>
+            <ProfileComponents></ProfileComponents>
         </div>
     )
 }

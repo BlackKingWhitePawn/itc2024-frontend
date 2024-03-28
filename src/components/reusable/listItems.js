@@ -13,12 +13,11 @@ import profileCircle from "../../assets/icons/profile-circle.svg";
 import TrafficIcon from '@mui/icons-material/Traffic';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ExploreIcon from '@mui/icons-material/Explore';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 // TODO: удалить
 export function MainListItems({ item }) {
   const navigate = useNavigate();
-
   if (item === 'Карты') return <ListItemButton onClick={() => navigate("/map")}>
     <ListItemIcon>
       <ExploreIcon />
@@ -31,7 +30,7 @@ export function MainListItems({ item }) {
     </ListItemIcon>
     <ListItemText primary="Объекты" />
   </ListItemButton>
-  else if (item === 'Поставщики') return <ListItemButton onClick={() => navigate("/#")}>
+  else if (item === 'Поставщики') return <ListItemButton onClick={() => navigate("/accounts")}>
     <ListItemIcon>
       <PeopleIcon />
     </ListItemIcon>
@@ -55,20 +54,8 @@ export function getSecondaryListItems() {
   return (
     <React.Fragment>
       <ListSubheader component="div" inset>
-        {/* Saved reports */}
       </ListSubheader>
-      {/* <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItemButton> */}
-      {/* <ListItemButton>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItemButton> */}
+
       <ListItemButton>
         <ListItemIcon>
           <ExitToAppIcon color='error' />
