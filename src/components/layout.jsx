@@ -8,6 +8,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import PrimarySearchAppBar from './app-bar';
+import { Breadcrumbs, Stack } from '@mui/material';
 
 function Copyright(props) {
     return (
@@ -44,10 +45,23 @@ export default function Layout({ children }) {
                     }}
                 >
                     <Toolbar />
-                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                    <Container sx={{ mt: 4, mb: 4 }}>
                         <Grid container spacing={3} >
-                            <Grid item xs={8}>
-                                {children}
+                            <Grid item >
+                                <Stack spacing={2}>
+                                    <Breadcrumbs aria-label="breadcrumb">
+                                        <Link underline="hover" color="inherit" href="/profile">
+                                            Профиль
+                                        </Link>
+                                        <Link underline="hover" color="inherit" href="#">
+                                            Название управления
+                                        </Link>
+                                        <Typography color="text.primary">
+                                            Название подрядчика
+                                        </Typography>
+                                    </Breadcrumbs>
+                                    {children}
+                                </Stack>
                             </Grid>
                         </Grid>
                         {/* <Copyright sx={{ pt: 4 }} /> */}

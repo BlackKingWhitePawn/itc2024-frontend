@@ -12,6 +12,7 @@ import UserPage from "./pages/user-page";
 import MapPage from "./pages/map-page";
 import RegistrationPage from "./pages/registration-page";
 import AnalysPage from "./pages/analys-page"
+import CompaniesPage from "./pages/companies-page";
 
 
 const router = createBrowserRouter([
@@ -30,11 +31,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/map",
-    element: <MapPage/>,
+    element: <MapPage />,
   },
   {
-    path: "/analytics",
+    path: "/analysis",
     element: <AnalysPage />
+  },
+  {
+    path: "/companies",
+    element: <CompaniesPage />
   }
 ]);
 
