@@ -6,7 +6,7 @@ import '../components/Nav-Sidebar/Nav-Sidebar.scss'
 import user from '../assets/icons/user.svg'
 import MainSidebar from "../components/Main-Sidebar/Main-Sidebar";
 import { Fab } from "@mui/material";
-import { AccountCircleOutlined } from "@mui/icons-material";
+import { AccountCircle, AccountCircleOutlined } from "@mui/icons-material";
 
 function MapPage() {
 
@@ -25,7 +25,7 @@ function MapPage() {
         <MapComponent markers={markers} currMarker={marker} setMarker={setMarker} />
         <div className='user-container'>
           <Fab>
-            <AccountCircleOutlined />
+            <AccountCircle />
           </Fab>
         </div>
       </div>
