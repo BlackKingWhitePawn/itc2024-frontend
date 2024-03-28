@@ -12,6 +12,8 @@ import UserPage from "./pages/user-page";
 import MapPage from "./pages/map-page";
 import RegistrationPage from "./pages/registration-page";
 import CompaniesPage from "./pages/companies-page";
+import CompanyPage from "./pages/company-page";
+import './index.scss'
 import AccountsPage from "./pages/accounts-page"
 
 
@@ -40,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "/accounts",
     element: <AccountsPage />
+  },
+  {
+    path: "/company/:companyId",
+    element: <CompanyPage />
   }
 ]);
 

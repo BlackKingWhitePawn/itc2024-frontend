@@ -1,0 +1,17 @@
+.company-card {
+    &__stat {
+        font-size: 14px;
+        margin-top: 8px;
+        margin-bottom: 0;
+
+        p {
+            margin: 4px;
+        }
+    }
+
+    &__stat-title {
+        color: gray;
+    }
+
+    &__stat-value {}
+}
