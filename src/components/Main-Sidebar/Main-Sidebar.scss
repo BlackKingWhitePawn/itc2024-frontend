@@ -1,9 +1,11 @@
+
 .main-sidebar {
+    --main-width: 15vw;
     position: fixed;
     left: 6vw;
     top: 5vh;
     height: 90vh;
-    width: 15vw;
+    width: var(--main-width);
     padding-left: 10px;
     padding-right: 10px;
     background-color: rgba($color: #FFF, $alpha: 0.8);
@@ -25,15 +27,15 @@
 
 @keyframes sidebarClosed {
     from {
-        width: 15vw;
+        width: var(--main-width);
         padding-left: 10px;
         padding-right: 10px;
-        // opacity: 1;
+        opacity: 1;
     }
     to {
         width: 0px;
         padding: 0px;
-        // opacity: 0;
+        opacity: 0;
     }
 }
 
@@ -42,12 +44,12 @@
     from {
         width: 0px;
         padding: 0px;
-        // opacity: 0;
+        opacity: 0;
     }
     to {
-        width: 15vw;
+        width: var(--main-width);
         padding-left: 10px;
         padding-right: 10px;
-        // opacity: 1;
+        opacity: 1;
     }
 }
