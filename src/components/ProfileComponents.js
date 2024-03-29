@@ -32,7 +32,7 @@ export default function ProfileComponents() {
         <Grid container spacing={3}>
       {/* Chart */}
       <Grid item xs={12} md={8} lg={9}>
-        <Paper
+        <Paper style={{borderRadius:"10px", boxShadow:"4px 8px 8px rgba(0,0,0,0.12)", position:"relative", zIndex:"2"}}
           sx={{
             p: 2,
             display: 'flex',
@@ -44,7 +44,7 @@ export default function ProfileComponents() {
         </Paper>
       </Grid>
       <Grid item xs={12} md={4} lg={3}>
-        <Paper
+        <Paper style={{borderRadius:"10px", boxShadow:"4px 8px 8px rgba(0,0,0,0.12)", position:"relative", zIndex:"2"}}
           sx={{
             p: 2,
             display: 'flex',

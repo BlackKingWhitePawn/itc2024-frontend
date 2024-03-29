@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { Unstable_Popup as BasePopup } from '@mui/base/Unstable_Popup';
-import { Box, styled } from '@mui/system';
+import { Box, Stack, styled } from '@mui/system';
 import ChartScatter from './chart-scatter';
-import { Tab, Tabs } from '@mui/material';
+import { Tab, Tabs, Typography } from '@mui/material';
 import ChartLine from './chart-line';
 import ChartPie from './chart-pie';
+import mockData from '../data/mock-its';
+import { DataGrid } from '@mui/x-data-grid';
 
-export default function ChartPopup({ isOpened, setIsOpened, isCollapsed }) {
+
+export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChosen, setCatChosen }) {
   const [tabOpened, setTabOpened] = React.useState(0);
 
   const handleTabChange = (event, newValue) => {
@@ -18,12 +21,45 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed }) {
       case 0:
         return <ChartScatter />;
       case 1:
-        return <ChartLine />;
+        return <ChartLine data={{
+          x: [1, 2, 3, 4, 5, 6, 7],
+          y: [1, 2, 3, 4, 5, 6, 7]
+        }} />;
       case 2:
         return <ChartPie />;
       default:
         return <ChartScatter />;
     }
+  }
+
+  const resolveTable = () => {
+    return <DataGrid
+      onRowClick={console.log}
+      columns={
+        [
+          { field: 'id', headerName: 'ID' },
+          { field: 'object_type', headerName: 'Тип', flex: 1 },
+          { field: 'customer_id', headerName: 'Подрядчик' },
+          { field: 'score', headerName: 'Оценка', flex: 1 },
+          { field: 'cords', headerName: 'Координаты', flex: 1 },
+        ]}
+      rows={
+        mockData.map((data) => ({
+          id: data.id,
+          object_type: data.object_type,
+          customer_id: data.customer_id,
+          score: (data.history.reduce((accumulator, currentValue) => accumulator + currentValue.score, 0) / data.history.length * 10).toFixed(1),
+          cords: `${data.coords.lat.toFixed(6)}, ${data.coords.lon.toFixed(6)}`
+        }))
+      }
+      style={{ width: '100%' }
+      }
+      initialState={{
+        pagination: {
+          paginationModel: { page: 0, pageSize: 5 },
+        },
+      }}
+    />
   }
 
   return (
@@ -48,13 +84,21 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed }) {
           <PopupBody width='100%'>
             <Box sx={{ borderColor: 'divider' }}>
               {/* TODO: fix tab indicator */}
-              <Tabs value={tabOpened} onChange={handleTabChange} centered>
-                <Tab label="Точечный" value={0} />
-                <Tab label="Линия" value={1} />
-                <Tab label="Круговая" value={2} />
-              </Tabs>
+              {
+                catChosen == 1
+                  ? null
+                  : <Tabs value={tabOpened} onChange={handleTabChange} centered>
+                    <Tab label="Точечный" value={0} />
+                    <Tab label="Линия" value={1} />
+                    <Tab label="Распределение событий" value={2} />
+                  </Tabs>
+              }
             </Box>
-            {resolveChart()}
+            {
+              catChosen == 1
+                ? resolveTable()
+                : resolveChart()
+            }
           </PopupBody>
         </BasePopup>
       </div>

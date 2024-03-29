@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import AccountComponents from '../components/AccountComponents'
 import axios from 'axios'
 import URLS from '../urls'
+import backimg from "../assets/img/LooperGroup.svg"
 
 
 function AccountsPage() {
@@ -23,6 +24,7 @@ function AccountsPage() {
 
     return (
         <div>
+            <img src={backimg} style={{position:"fixed", right:"0", zIndex:"0"}}></img>
             <AccountComponents accounts={accountsData} />
         </div>
     )

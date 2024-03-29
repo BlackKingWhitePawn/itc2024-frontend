@@ -186,7 +186,7 @@ const Layout = observer(({ children, pageName }) => {
               </ListItemIcon>
               <ListItemText primary="Управления" />
             </ListItemButton>
-            <ListItemButton onClick={() => navigate("/#")}>
+            <ListItemButton onClick={() => navigate("/analysis")}>
               <ListItemIcon>
                 <BarChartIcon />
               </ListItemIcon>
