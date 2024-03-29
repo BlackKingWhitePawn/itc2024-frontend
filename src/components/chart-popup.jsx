@@ -35,7 +35,9 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
   useEffect(() => {
     if (ref.current && isOpened) {
       console.log(chosen)
+      if (ref.current.selectRow){
       ref.current.selectRow(chosen, true, true)
+      }
     }
 
   }, [chosen])
