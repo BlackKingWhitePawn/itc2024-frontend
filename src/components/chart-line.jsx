@@ -52,7 +52,12 @@ export default function ChartLine({ title, ...props }) {
         <LineChart
             height={300}
             xAxis={[{ data: data.x }]}
-            series={data.ys.map((v) => ({ data: v }))}
+            series={data.ys.map((yData) => (
+                {
+                    data: Array.isArray(yData[1]) ? yData[1] : yData,
+                    label: Array.isArray(yData[1]) ? yData[0] : undefined
+                }
+            ))}
             grid={{ horizontal: true, vertical: true }}
             {...props}
         /></>

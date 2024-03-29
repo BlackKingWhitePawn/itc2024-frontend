@@ -18,7 +18,10 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed }) {
       case 0:
         return <ChartScatter />;
       case 1:
-        return <ChartLine />;
+        return <ChartLine data={{
+          x: [1, 2, 3, 4, 5, 6, 7],
+          y: [1, 2, 3, 4, 5, 6, 7]
+        }} />;
       case 2:
         return <ChartPie />;
       default:

@@ -36,7 +36,7 @@ export function MainListItems({ item }) {
     </ListItemIcon>
     <ListItemText primary="Поставщики" />
   </ListItemButton>
-  else if (item === 'Аналитика') return <ListItemButton onClick={() => navigate("/#")}>
+  else if (item === 'Аналитика') return <ListItemButton onClick={() => navigate("/analysis")}>
     <ListItemIcon>
       <BarChartIcon />
     </ListItemIcon>

@@ -15,6 +15,7 @@ import CompaniesPage from "./pages/companies-page";
 import CompanyPage from "./pages/company-page";
 import './index.scss'
 import AccountsPage from "./pages/accounts-page"
+import AnalysisPage from "./pages/analysis-page";
 
 
 const router = createBrowserRouter([
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: "/company/:companyId",
     element: <CompanyPage />
+  },
+  {
+    path: "/analysis",
+    element: <AnalysisPage />
   }
 ]);
 
