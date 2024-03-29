@@ -195,6 +195,7 @@ function CompanyPage() {
         axios
             .get(`${URLS.COMPANY(companyId)}`)
             .then(res => {
+                console.log(res.data);
                 setCompanyData(res.data);
             })
             .catch(err => {
@@ -207,11 +208,11 @@ function CompanyPage() {
     }
 
     return (
-        <Layout pageName={companyData?.name}>
+        <Layout pageName={companyData?.name} loaded={!!companyData}>
             <BreadcrumbsNavigation items={[
                 { name: 'Структура', path: '/accounts' },
                 // TODO: получать айди динамически из ответа
-                { name: 'Название управления', path: '/accounts/id' },
+                { name: `Управление ${companyData?.AccountID}`, path: `/account/AccountName_id_${companyData?.AccountID}` },
                 { name: companyData?.name },
             ]} />
             <Grid container spacing={1}>
@@ -230,7 +231,19 @@ function CompanyPage() {
                         {resolveTitle()}
                         <Button variant='text' onClick={() => setSelectedChart(Math.abs(selectedChart - 1))}>{titles[Math.abs(selectedChart - 1)]}</Button>
                     </Stack>
-                    <ChartLine data={dataset[selectedChart]} height={500} title='Функция выживаемости' />
+                    <ChartLine
+                        data={dataset[selectedChart]}
+                        height={500}
+                        title='Функция выживаемости'
+                        xAxis={[{
+                            data: dataset[selectedChart].x,
+                            label: 'Дни',
+                        }]}
+                        yAxis={[{
+                            data: dataset[selectedChart].ys,
+                            label: 'Вероятность',
+                        }]}
+                    />
                 </Grid>
             </Grid>
         </Layout>

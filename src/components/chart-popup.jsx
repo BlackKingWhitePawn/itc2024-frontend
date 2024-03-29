@@ -7,9 +7,24 @@ import ChartLine from './chart-line';
 import ChartPie from './chart-pie';
 import mockData from '../data/mock-its';
 import { DataGrid, selectedGridRowsCountSelector } from '@mui/x-data-grid';
-import { makeStyles } from '@mui/styles';
 import { useEffect } from 'react';
 import { useGridApiRef } from '@mui/x-data-grid';
+import { BarChart } from '@mui/x-charts';
+
+const HIST_DATA = {
+  x: ['Отключение светофора',
+    'Ухудшение качества изображения камеры, связанное с отложениями на стекле',
+    'Нестабильная работа',
+    'Отсутствие данных, превышающее регламентные сроки',
+    'Самопроизвольные переход в жёлтый мигающий',
+    'Информация на ТПИ/ЗПИ либо не выводится, либо выводится некорректно',
+    'Напряжение на нагрузке ниже номинального',
+    'С объекта приходят некорректные данные',
+    'Отсутствие данных с отдельного датчика/датчиков',
+    'Отсутствие напряжения на батарее в ночное время'],
+  y: [65.5, 64., 49.5, 48.45833333, 40.,
+    34., 32., 23., 22.5, 18.]
+}
 
 
 export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChosen, setCatChosen, data, chosen, setChosen }) {
@@ -34,10 +49,15 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
       case 0:
         return <ChartScatter />;
       case 1:
-        return <ChartLine data={{
-          x: [1, 2, 3, 4, 5, 6, 7],
-          y: [1, 2, 3, 4, 5, 6, 7]
-        }} />;
+        // return <ChartLine data={{
+        //   x: [1, 2, 3, 4, 5, 6, 7],
+        //   y: [1, 2, 3, 4, 5, 6, 7]
+        // }} />;
+        return <BarChart
+          xAxis={[{ scaleType: 'band', data: HIST_DATA.x }]}
+          series={[{ data: HIST_DATA.y }]}
+          height={300}
+        />
       case 2:
         return <ChartPie />;
       default:
@@ -108,7 +128,7 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
                   ? null
                   : <Tabs value={tabOpened} onChange={handleTabChange} centered>
                     <Tab label="Точечный" value={0} />
-                    <Tab label="Линия" value={1} />
+                    <Tab label="Распределение по характеру инцидента" value={1} />
                     <Tab label="Распределение событий" value={2} />
                   </Tabs>
               }

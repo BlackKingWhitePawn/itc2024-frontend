@@ -17,22 +17,22 @@ export const ProfileEdit = ({AccountName}) => {
                 </div>
 
                <div className="date-of-birth">
-                    <p style={{marginBottom:"5px"}}>Дата рождения</p>
+                    <p style={{marginBottom:"5px", fontWeight:"500"}}>Дата рождения</p>
                     <p style={{marginTop:"5px"}}>15.05.1723</p>
                </div>
 
               <div className="other-stuff">
                   <div className="name-form">
-                          <p style={{marginBlock:"5px"}}>Телефон</p>
+                          <p style={{marginBlock:"5px", fontWeight:"500"}}>Телефон</p>
                           <input className="input-form" value={"8 (952) 812 88-69"}></input>
                     </div>
                     <div className="name-form">
-                          <p style={{marginBlock:"5px"}}>Город</p>
+                          <p style={{marginBlock:"5px", fontWeight:"500"}}>Город</p>
                           <input className="input-form" value={"Пермь"}></input>
                         </div>
               </div>
               <div className="name-form">
-                          <p style={{marginBlock:"5px"}}>Должность</p>
+                          <p style={{marginBlock:"5px", fontWeight:"500"}}>Должность</p>
                           <input className="input-form" value={"Аналитик"} style={{width:"95%"}}></input>
               </div>
               <button style={{marginTop:"10px", backgroundColor:"#D76223", color:"#FFF", border:"0px", borderRadius:"4px", cursor:"pointer", paddingTop:"5px", paddingBottom:"5px"}}>Сохранить изменения</button>

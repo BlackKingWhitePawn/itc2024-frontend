@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../components/layout'
 import BreadcrumbsNavigation from '../components/navigation'
 import { Stack } from '@mui/system'
 import ChartLine from '../components/chart-line'
 import { Typography } from '@mui/material'
+import axios from 'axios'
+import URLS from '../urls'
+import CompanyCard from '../components/company-card'
+import { Link } from 'react-router-dom'
 
 const data = {
     x: [0, 24, 48, 72, 96, 120, 144, 168, 192, 216],
@@ -111,6 +115,20 @@ const data = {
 }
 
 function AnalysisPage() {
+    const [selectedCompany, setSelectedCompany] = useState(null)
+    const [companyData, setCompanyData] = useState(null)
+
+    useEffect(() => {
+        axios
+            .get(URLS.COMPANY(selectedCompany))
+            .then((res) => {
+                setCompanyData(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [selectedCompany])
+
     return (
         <Layout pageName='Аналитика'>
             <Stack spacing={2}>
@@ -121,7 +139,26 @@ function AnalysisPage() {
                     ]} />
 
                 <Typography variant="h5">Сравнительный анализ выживаемости объекта</Typography>
-                <ChartLine data={data} height={400} />
+                <ChartLine
+                    data={data}
+                    height={400}
+                    xAxis={[{
+                        data: data.x,
+                        label: 'Дни',
+                    }]}
+                    yAxis={[{
+                        data: data.ys,
+                        label: 'Вероятность',
+                    }]}
+                    onLineClick={(e, data) => {
+                        console.log(data);
+                        setSelectedCompany(data['seriesId'].split('id-')[1])
+                    }}
+                />
+                {companyData &&
+                    <Link to={`/company/${companyData.id}`} style={{ textDecoration: 'none' }}>
+                        <CompanyCard {...companyData} />
+                    </Link>}
             </Stack>
         </Layout>
     )

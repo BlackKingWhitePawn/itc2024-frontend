@@ -71,7 +71,7 @@ function CompaniesPage() {
         <Layout pageName={accountNameParsed}>
             <Stack spacing={2}>
                 <BreadcrumbsNavigation items={[{ name: 'Структура', path: '/accounts' }, { name: accountNameParsed }]} />
-                <div style={{ width: '100%', backgroundColor:"#F8F8F8" }}>
+                <div style={{ width: '100%', backgroundColor: "#F8F8F8" }}>
                     <DataGrid
                         onRowClick={params => navigate(`/company/${params.row.id}/`)}
                         rows={rows}

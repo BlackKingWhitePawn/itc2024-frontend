@@ -14,27 +14,27 @@ export const ProfileCard = ({AccountName}) => {
                   </div>
                   <div className="profile-cart-cont">
                     <div className="profile-raw" style={{display:"flex", gap: "30px", justifyContent:"space-between"}}>
-                      <p className="profile-chart">Полное имя</p>
+                      <p className="profile-chart" style={{fontWeight:"500"}}>Полное имя</p>
                       <p>Василий Татищев</p>
                     </div>
 
                     <div className="profile-raw" style={{display:"flex", gap: "30px", justifyContent:"space-between"}}>
-                      <p className="profile-chart">Дата рождения</p>
+                      <p className="profile-chart" style={{fontWeight:"500"}}>Дата рождения</p>
                       <p>15.05.1723, 300 лет</p>
                     </div>
 
                     <div className="profile-raw" style={{display:"flex", gap: "30px", justifyContent:"space-between"}}>
-                      <p className="profile-chart">Телефон</p>
+                      <p className="profile-chart" style={{fontWeight:"500"}}>Телефон</p>
                       <p>8 (952) 812 88-69</p>
                     </div>
 
                     <div className="profile-raw" style={{display:"flex", gap: "30px", justifyContent:"space-between"}}>
-                      <p className="profile-chart">Город</p>
+                      <p className="profile-chart" style={{fontWeight:"500"}}>Город</p>
                       <p>Пермь</p>
                     </div>
 
                     <div className="profile-raw" style={{display:"flex", gap: "30px", justifyContent:"space-between"}}>
-                      <p className="profile-chart">Должность</p>
+                      <p className="profile-chart" style={{fontWeight:"500"}}>Должность</p>
                       <p>Аналитик</p>
                     </div>
                   </div>
