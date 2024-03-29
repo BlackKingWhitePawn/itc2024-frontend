@@ -19,23 +19,13 @@ import { Typography } from '@mui/material';
 //  * ```
 //  * @return {ReactElement} The rendered line chart component.
 //  */
-export default function ChartLine({ title, ...props }) {
-    const data = {
-        x: [1, 2, 3, 4, 5, 6, 7],
-        ys: [
-            [1, 2, 3, 4, 5, 6, 7],
-            [4, 2, 3, 4, 5, 6, 7],
-            [7, 2, 3, 4, 5, 6, 7],
-            [10, 2, 3, 4, 5, 6, 7],
-        ]
-    }
-
+export default function ChartLine({ title, data, ...props }) {
     function resolveTitle() {
         if (title) return <Typography style={{ marginLeft: '16px' }} variant='h5'>{title}</Typography> // title
         return <Typography style={{ marginLeft: '16px' }} variant='h5'>Функция выживаемости</Typography>
     }
     console.log("hui", data)
-    if (data.ys===undefined) return (
+    if (data.ys === undefined) return (
         <>
             <LineChart
                 xAxis={[{ data: data.x }]}
@@ -47,7 +37,7 @@ export default function ChartLine({ title, ...props }) {
             />
         </>
     );
-    
+
     if (Array.isArray(data.ys)) return <>
         <LineChart
             height={300}
