@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import ProfileComponents from '../components/ProfileComponents'
 import { ProfileCard } from '../components/ProfileCard'
 import { ProfileEdit } from '../components/ProfileEdit'
+import backimg from "../assets/img/LooperGroup.svg"
 
 function UserPage() {
     const navigate = useNavigate()
@@ -15,7 +16,8 @@ function UserPage() {
 
     return (
         <div>
-            <ProfileComponents></ProfileComponents>
+            <img src={backimg} style={{position:"fixed", right:"0", zIndex:"0"}}></img>
+            <ProfileComponents style={{position:"relative", zIndex:"2"}}></ProfileComponents>
         </div>
     )
 }
