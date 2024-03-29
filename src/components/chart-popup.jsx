@@ -90,7 +90,7 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
                   : <Tabs value={tabOpened} onChange={handleTabChange} centered>
                     <Tab label="Точечный" value={0} />
                     <Tab label="Линия" value={1} />
-                    <Tab label="Круговая" value={2} />
+                    <Tab label="Распределение событий" value={2} />
                   </Tabs>
               }
             </Box>
