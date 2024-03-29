@@ -8,14 +8,14 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AccountComponents({ accounts }) {
   const navigate = useNavigate()
-  const pageName = "Аккаунты"
+  const pageName = "Управления"
 
   return (
     <Layout pageName={pageName}>
       <Grid container spacing={2}>
         {accounts.map((account, index) => (
           <Grid item xs={12} sm={6} md={3} key={index} sx={{ display: 'flex' }}>
-            <Card style={{ cursor: "pointer", borderRadius:"10px", boxShadow:"4px 8px 8px rgba(0,0,0,0.12)"}} onClick={async event => { navigate(`/account/${account.name.replace(' ', '_')}_id_${account.id}`); }}
+            <Card style={{ cursor: "pointer", borderRadius: "10px", boxShadow: "4px 8px 8px rgba(0,0,0,0.12)" }} onClick={async event => { navigate(`/account/${account.name.replace(' ', '_')}_id_${account.id}`); }}
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
