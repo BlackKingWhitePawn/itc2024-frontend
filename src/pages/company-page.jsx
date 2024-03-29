@@ -195,6 +195,7 @@ function CompanyPage() {
         axios
             .get(`${URLS.COMPANY(companyId)}`)
             .then(res => {
+                console.log(res.data);
                 setCompanyData(res.data);
             })
             .catch(err => {
@@ -211,7 +212,7 @@ function CompanyPage() {
             <BreadcrumbsNavigation items={[
                 { name: 'Структура', path: '/accounts' },
                 // TODO: получать айди динамически из ответа
-                { name: 'Название управления', path: '/accounts/id' },
+                { name: `Управление ${companyData?.AccountID}`, path: `/account/AccountName_id_${companyData?.AccountID}` },
                 { name: companyData?.name },
             ]} />
             <Grid container spacing={1}>

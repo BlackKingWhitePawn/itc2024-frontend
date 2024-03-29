@@ -45,9 +45,7 @@ function CompanyCard({ id, name, tasks, region, statistics, metrics }) {
                     {region}
                 </Typography>
                 <Typography variant="body2">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
+                    Информация о подрядчике
                 </Typography>
                 {statShowed && <Stack className='company-card__stat'>
                     {Object.entries(statistics).map(([title, value]) => (
