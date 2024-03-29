@@ -26,10 +26,13 @@ function SecondSidebar({data}) {
     if (data !== undefined)
     return(
         <div className='second-sidebar'>
-            <p>id: {data["id"]}</p>
-            <p>тип объекта: {data["object_type"]}</p>
-            <p>id владельца: {data["customer_id"]}</p>
-            <p>средняя оценка обслуживания: {Math.round(avgHistScore * 100) / 10} / 10</p>
+
+            <div className='sec-sb-header'>
+                <p> <strong> ID:</strong> {data["id"]}</p>
+                <p><strong>Тип объекта: </strong>{data["object_type"]}</p>
+                <p><strong>ID владельца:</strong> {data["customer_id"]}</p>
+                <p><strong>Средняя оценка обслуживания:</strong> {Math.round(avgHistScore * 100) / 10} / 10</p>
+            </div>
             <h1>История обслуживания:</h1>
             {data["history"].map(hist => {
                 return(

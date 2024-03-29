@@ -37,13 +37,47 @@
 .type-island-regular {
     padding: 5px;
     background-color: #8ae19ba1;
-    border-radius: 20px;
+    border-radius: 10px;
     margin-bottom: 5px;
+}
+
+.type-island-regular p {
+    font-size: 16px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .type-island-incident {
     padding: 5px;
     background-color: #e1988a91;
-    border-radius: 20px;
+    border-radius: 10px;
     margin-bottom: 5px;
+}
+
+.type-island-incident p {
+    font-size: 16px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.sec-sb-header {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    // padding: 5px;
+    margin-top: 10px;
+}
+
+.sec-sb-header p {
+    font-size: 16px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
