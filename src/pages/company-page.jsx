@@ -9,6 +9,8 @@ import URLS from '../urls'
 import BreadcrumbsNavigation from '../components/navigation';
 import { Box, Stack } from '@mui/system'
 import Button from '@mui/material/Button';
+import { InsightsRounded, StackedBarChartRounded } from '@mui/icons-material'
+import { BarChart } from '@mui/x-charts'
 function CompanyPage() {
     const data1 = {
         x: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -191,12 +193,30 @@ function CompanyPage() {
     let { companyId } = useParams();
     const [companyData, setCompanyData] = React.useState(null);
 
+    const [showedMetrics, setShowedMetrics] = React.useState(true);
+    const [metricsRegular, setMetricsRegular] = React.useState([]);
+    const [metricsIncident, setMetricsIncident] = React.useState([]);
+
     useEffect(() => {
         axios
             .get(`${URLS.COMPANY(companyId)}`)
             .then(res => {
                 console.log(res.data);
                 setCompanyData(res.data);
+                setMetricsIncident([
+                    res.data.metrixes.percent_compete_incident ?? 0,
+                    res.data.metrixes.pointer_task_tardiness ?? 0,
+                    res.data.metrixes.pointer_reaction_incident_speed_regular ?? 0,
+                    0,
+                    res.data.metrixes.pointer_avg_speed_work ?? 0
+                ])
+                setMetricsRegular([
+                    res.data.metrixes.percent_compete_incident_regular ?? 0,
+                    res.data.metrixes.pointer_task_tardiness_regular ?? 0,
+                    0,
+                    res.data.metrixes.speed_reaction_tardiness ?? 0,
+                    res.data.metrixes.pointer_avg_speed_work_regular ?? 0
+                ])
             })
             .catch(err => {
                 console.log(err);
@@ -227,23 +247,51 @@ function CompanyPage() {
                     </Stack>
                 </Grid>
                 <Grid container item xs>
-                    <Stack spacing={2} direction={'row'} style={{ width: '100%' }}>
-                        {resolveTitle()}
-                        <Button variant='text' onClick={() => setSelectedChart(Math.abs(selectedChart - 1))}>{titles[Math.abs(selectedChart - 1)]}</Button>
-                    </Stack>
-                    <ChartLine
-                        data={dataset[selectedChart]}
-                        height={500}
-                        title='Функция выживаемости'
-                        xAxis={[{
-                            data: dataset[selectedChart].x,
-                            label: 'Дни',
-                        }]}
-                        yAxis={[{
-                            data: dataset[selectedChart].ys,
-                            label: 'Вероятность',
-                        }]}
-                    />
+                    {showedMetrics ? <>
+                        <Box flexDirection={'row'} display={'flex'} justifyContent={'space-between'} width={'100%'}>
+                            <Typography style={{ marginLeft: '16px' }} variant='h5'>Критерии оценки качества обслуживания </Typography>
+                            <Button onClick={() => setShowedMetrics(!showedMetrics)}>
+                                <StackedBarChartRounded />
+                            </Button>
+                        </Box>
+                        <BarChart
+                            xAxis={[{
+                                data: ['Выполнение вовремя',
+                                    'Среднее время задержки',
+                                    'Качество обслуживания',
+                                    'Скорость обработки задачи',
+                                    'Скорость реагирования'],
+                                scaleType: 'band'
+                            }]}
+                            series={[
+                                { data: metricsRegular, label: 'Качество регулярного обслуживания' },
+                                { data: metricsIncident, label: 'Качество инцидентного реагирования' }]}
+                            height={500}
+                            grid={{ horizontal: true, vertical: true }}
+                        />
+                    </> : <>
+                        <Box flexDirection={'row'} display={'flex'} justifyContent={'space-between'} width={'100%'}>
+                            <Stack spacing={2} direction={'row'} style={{ width: '100%' }}>
+                                {resolveTitle()}
+                                <Button variant='text' onClick={() => setSelectedChart(Math.abs(selectedChart - 1))}>{titles[Math.abs(selectedChart - 1)]}</Button>
+                            </Stack>
+                            <Button onClick={() => setShowedMetrics(!showedMetrics)}>
+                                <InsightsRounded />
+                            </Button>
+                        </Box>
+                        <ChartLine
+                            data={dataset[selectedChart]}
+                            height={500}
+                            title='Функция выживаемости'
+                            xAxis={[{
+                                data: dataset[selectedChart].x,
+                                label: 'Дни',
+                            }]}
+                            yAxis={[{
+                                data: dataset[selectedChart].ys,
+                                label: 'Вероятность',
+                            }]}
+                        /></>}
                 </Grid>
             </Grid>
         </Layout>
