@@ -134,6 +134,9 @@ function MapPage() {
           isCollapsed={mainSidebarOpen}
           catChosen={catChosen}
           setCatChosen={setCatChosen}
+          data={newData}
+          chosen={marker}
+          setChosen={setMarker}
         />
       </div>
       <SecondSidebar data={newData.filter(obj => obj["id"] == marker)[0]}/>

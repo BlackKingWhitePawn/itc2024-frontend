@@ -8,6 +8,7 @@
     "@googlemaps/markerclusterer": "^2.5.3",
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
+    "@mui/styles": "^5.15.14",
     "@mui/x-charts": "^7.0.0",
     "@mui/x-data-grid": "^7.0.0",
     "@react-google-maps/api": "^2.19.3",

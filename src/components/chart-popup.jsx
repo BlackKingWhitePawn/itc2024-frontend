@@ -6,11 +6,24 @@ import { Tab, Tabs, Typography } from '@mui/material';
 import ChartLine from './chart-line';
 import ChartPie from './chart-pie';
 import mockData from '../data/mock-its';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, selectedGridRowsCountSelector } from '@mui/x-data-grid';
+import { makeStyles } from '@mui/styles';
+import { useEffect } from 'react';
+import { useGridApiRef } from '@mui/x-data-grid';
 
 
-export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChosen, setCatChosen }) {
+export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChosen, setCatChosen, data, chosen, setChosen }) {
+
   const [tabOpened, setTabOpened] = React.useState(0);
+
+  const ref = useGridApiRef();
+  useEffect(() => {
+    if (ref.current && isOpened){
+      console.log(chosen)
+      ref.current.selectRow(chosen, true, true)
+    }
+    
+  }, [chosen])
 
   const handleTabChange = (event, newValue) => {
     setTabOpened(newValue);
@@ -33,18 +46,21 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
   }
 
   const resolveTable = () => {
+
     return <DataGrid
-      onRowClick={console.log}
+      onRowClick={(e) => setChosen(e["id"])}
       columns={
         [
           { field: 'id', headerName: 'ID' },
           { field: 'object_type', headerName: 'Тип', flex: 1 },
-          { field: 'customer_id', headerName: 'Подрядчик' },
-          { field: 'score', headerName: 'Оценка', flex: 1 },
+          { field: 'customer_id', headerName: 'Подрядчик', flex: 1 },
+          { field: 'score', headerName: 'Ср. оценка обслуживания', flex: 1 },
           { field: 'cords', headerName: 'Координаты', flex: 1 },
         ]}
+      apiRef={ref}
       rows={
-        mockData.map((data) => ({
+        data.map((data) => ({
+          
           id: data.id,
           object_type: data.object_type,
           customer_id: data.customer_id,
@@ -52,8 +68,11 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
           cords: `${data.coords.lat.toFixed(6)}, ${data.coords.lon.toFixed(6)}`
         }))
       }
-      style={{ width: '100%' }
-      }
+      style={{ width: isCollapsed ? "53vw" : '70vw' }}
+      // disableRowSelectionOnClick
+      // getRowClassName={(params) =>
+      //   params.id === chosen ? classes.selectedRow : ''
+      // }
       initialState={{
         pagination: {
           paginationModel: { page: 0, pageSize: 5 },
@@ -75,13 +94,13 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
           placement='bottom'
           offset={4}
           style={{
-            bottom: 0,
+            bottom: "1vh",
             top: 'none',
-            width: isCollapsed ? '71%' : '88%',
+            width: isCollapsed ? '55vw' : '72vw',
             left: isCollapsed ? '23%' : '6%'
           }}
         >
-          <PopupBody width='100%'>
+          <PopupBody width='40vw'>
             <Box sx={{ borderColor: 'divider' }}>
               {/* TODO: fix tab indicator */}
               {

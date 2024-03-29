@@ -4,13 +4,14 @@
     position: fixed;
     left: 6vw;
     top: 5vh;
-    height: 90vh;
+    height: 93vh;
     width: var(--main-width);
     padding-left: 10px;
     padding-right: 10px;
     background-color: rgba($color: #FFF, $alpha: 0.8);
     z-index: 10;
     border-radius: 20px;
+    overflow-y: auto;
 
     h1 {
         font-size: 30px;
@@ -71,29 +72,29 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 30px;
     margin-bottom: 20px;
     padding: 10px;
     cursor: pointer;
 
     // ПРОСТИТЕ МЕНЯ ЗА ЭТОТ ПИЗДЕЦ
     .logo1 > path {
-        stroke: #000;
+        stroke: #DB8FE4;
+        fill: #DB8FE4;
      }
      .logo2 > path {
-        stroke: #000;
+        stroke: #FD7474;
+        fill: #FD7474;
      }
      .logo3 > path {
-        stroke: #000;
-     }
-     .logo4 > path {
-        stroke: #000;
+        stroke: #FEA253;
+        fill: #FEA253;
      }
     
-     .logo1, .logo2, .logo3, .logo4 {
-        width: 20px;
-        height: 20px;
-        padding: 25px;
+     .logo1, .logo2, .logo3 {
+        width: 27px;
+        height: 27px;
+        padding: 22px;
         border-radius: 10px;
      }
     
@@ -103,5 +104,9 @@
         font-weight: 500;
         margin: 0;
     }
+}
+
+.cat-selected {
+    background-color: #d8deec;
 }
 

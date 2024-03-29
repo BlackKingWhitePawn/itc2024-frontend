@@ -185,6 +185,9 @@ const MapComponent = ({ markers, currMarker, setMarker, objType, filters }) => {
     const zoomOutButtonRef = useRef(null);
     const [markerClicked, setMarkerClicked] = useState(false);
     const [loaded, setLoaded] = useState(false);
+
+    // * UNLUCKO, NO TIME TO USE THIS
+
     const fetchData = async (street) => {
         try {
             const response = await fetch(`https://overpass-api.de/api/interpreter?data=[out:json][timeout:25];(way["name"="${street}"](57.869895,56.029766,58.133947,56.418401););out body;>;out skel qt;`, {
@@ -228,12 +231,20 @@ const MapComponent = ({ markers, currMarker, setMarker, objType, filters }) => {
                         strokeWeight: 2,
                     });
                     setLoaded(true); // ! EVIL SHIT
-                    polyline.setMap(mapRef.current);
+                    // polyline.setMap(mapRef.current);
                 }
             });
 
         });
     }
+
+    // ? Почему-то, если комменчу верх и оставляю функцию снизу, то не грузит маркеры. Пусть будет таким хаком. Ебал я в рот этот реакт
+
+    // * UNLUCKO, NO TIME TO USE THIS
+
+    // const draw = async () => {
+    //     if (mapRef.current) setLoaded(true);
+    // }
 
     // NAVIGATION BUTTON LOGIC
     const handleZoomIn = () => {
