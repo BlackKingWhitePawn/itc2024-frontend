@@ -11,26 +11,32 @@ const columns = [
     {
         field: 'id',
         headerName: 'ID',
-        width: 70
+        width: 70,
+        flex: 1
     },
     {
         field: 'name',
         headerName: 'Компания подрядчика',
-        width: 200
+        width: 200,
+        flex: 1,
+        // align: 'center',
     },
     {
         field: 'pointer_regulary',
         headerName: 'Регулярность',
         description: '',
         sortable: false,
-        width: 200
+        width: 200,
+        flex: 1,
+        // align: 'center',
     },
     {
         field: 'pointer_incidents',
         headerName: 'Обработка инцидентов',
         description: '',
         sortable: false,
-        width: 200
+        width: 200,
+        flex: 1,
     },
 ];
 
