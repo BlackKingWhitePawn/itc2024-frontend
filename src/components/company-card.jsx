@@ -33,7 +33,7 @@ function CompanyCard({ id, name, tasks, region, statistics, metrics }) {
     }
 
     return (
-        <Card style={{ width: '100%', height: 'min-content' }} className='company-card'>
+        <Card style={{ width: '100%', height: 'min-content', borderRadius:"10px", boxShadow:"4px 8px 8px rgba(0,0,0,0.12)"}} className='company-card'>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {`id-${id}`}
