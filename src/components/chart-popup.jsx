@@ -33,11 +33,11 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
 
   const ref = useGridApiRef();
   useEffect(() => {
-    if (ref.current && isOpened){
+    if (ref.current && isOpened) {
       console.log(chosen)
       ref.current.selectRow(chosen, true, true)
     }
-    
+
   }, [chosen])
 
   const handleTabChange = (event, newValue) => {
@@ -46,9 +46,9 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
 
   const resolveChart = () => {
     switch (tabOpened) {
+      // case 0:
+      //   return <ChartScatter />;
       case 0:
-        return <ChartScatter />;
-      case 1:
         // return <ChartLine data={{
         //   x: [1, 2, 3, 4, 5, 6, 7],
         //   y: [1, 2, 3, 4, 5, 6, 7]
@@ -58,10 +58,14 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
           series={[{ data: HIST_DATA.y }]}
           height={300}
         />
-      case 2:
+      case 1:
         return <ChartPie />;
       default:
-        return <ChartScatter />;
+        return <BarChart
+          xAxis={[{ scaleType: 'band', data: HIST_DATA.x }]}
+          series={[{ data: HIST_DATA.y }]}
+          height={300}
+        />;
     }
   }
 
@@ -80,7 +84,7 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
       apiRef={ref}
       rows={
         data.map((data) => ({
-          
+
           id: data.id,
           object_type: data.object_type,
           customer_id: data.customer_id,
@@ -127,7 +131,7 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
                 catChosen == 1
                   ? null
                   : <Tabs value={tabOpened} onChange={handleTabChange} centered>
-                    <Tab label="Точечный" value={0} />
+                    {/* <Tab label="Точечный" value={0} /> */}
                     <Tab label="Распределение по характеру инцидента" value={1} />
                     <Tab label="Распределение событий" value={2} />
                   </Tabs>
