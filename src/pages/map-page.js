@@ -10,6 +10,7 @@ import ChartPopup from "../components/chart-popup";
 import { useNavigate } from "react-router";
 
 import mockData from '../data/mock-its.json';
+import SecondSidebar from "../components/Second-Sidebar/Second-Sidebar";
 
 function MapPage() {
   const [data, setData] = useState(mockData)
@@ -30,7 +31,11 @@ function MapPage() {
 
   const [objType, setObjType] = useState("Видео")
 
-  const newData = useMemo(() => data.filter((obj) => obj["object_type"] == objType), [objType, data]);
+  // const newData = useMemo(() => data.filter((obj) => obj["object_type"] == objType), [objType, data]);
+  // ? реакт фреймворк для маргиналов блять
+  const [newData, setNewData] = useState(data.filter((obj) => obj["object_type"] == objType));
+
+  useEffect(() => {setNewData(data.filter((obj) => obj["object_type"] == objType))}, [objType])
 
   useEffect(() => {
     if (filters.label == 'Без фильтра') {
@@ -39,6 +44,7 @@ function MapPage() {
         newData[i]["color"] = 'neutral'
       }
       setData(newData);
+      setNewData(newData.filter((obj) => obj["object_type"] == objType))
     }
     if (filters.label == 'По дате последнего обслуживания') {
       let temp = data.map((obj) => {
@@ -59,6 +65,7 @@ function MapPage() {
         }
       }
       setData(newData);
+      setNewData(newData.filter((obj) => obj["object_type"] == objType))
     }
     if (filters.label == 'По рейтингу истории') {
       let temp = new Object;
@@ -81,6 +88,7 @@ function MapPage() {
         }
       }
       setData(newData);
+      setNewData(newData.filter((obj) => obj["object_type"] == objType))
     }
     if (filters.label == 'По рейтингу предсказания') {
       let temp = new Object;
@@ -102,6 +110,7 @@ function MapPage() {
         }
       }
       setData(newData);
+      setNewData(newData.filter((obj) => obj["object_type"] == objType))
     }
   }, [filters])
 
@@ -121,6 +130,7 @@ function MapPage() {
       <div className="bottom-popup-container">
         <ChartPopup isOpened={isOpened} setIsOpened={setIsOpened} isCollapsed={mainSidebarOpen} />
       </div>
+      <SecondSidebar data={newData.filter(obj => obj["id"] == marker)[0]}/>
     </div>
   );
 }
