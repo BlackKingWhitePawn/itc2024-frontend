@@ -47,10 +47,14 @@ function CompaniesPage() {
     const accountNameParsed = `Управление ${accountName}`
     const [page, setPage] = useState(1)
     const [rows, setRows] = useState([])
+    const [paginationModel, setPaginationModel] = React.useState({
+        pageSize: 10,
+        page: 0,
+    });
 
     useEffect(() => {
         axios
-            .get(`${URLS.ACCOUNT(accountId, 1)}`)
+            .get(`${URLS.ACCOUNT(accountId, 0)}`)
             .then(res => {
                 setRows(res.data.map(({ id, name, statistics }) => {
                     return {
@@ -76,13 +80,9 @@ function CompaniesPage() {
                         onRowClick={params => navigate(`/company/${params.row.id}/`)}
                         rows={rows}
                         columns={columns}
-                        initialState={{
-                            pagination: {
-                                paginationModel: { page: 0, pageSize: 10 },
-                            },
-                        }}
-                        pageSizeOptions={[10, 10]}
                         checkboxSelection
+                        paginationModel={paginationModel}
+                        onPaginationModelChange={setPaginationModel}
                     />
                 </div>
             </Stack>
