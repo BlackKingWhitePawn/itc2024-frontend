@@ -1,6 +1,6 @@
 import MapComponent from "../components/Map/Map";
 import NavSidebar from "../components/Nav-Sidebar/Nav-Sidebar";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import './map-page.scss'
 import user from '../assets/icons/user.svg'
 import MainSidebar from "../components/Main-Sidebar/Main-Sidebar";
@@ -9,10 +9,12 @@ import { AccountCircle, AccountCircleOutlined, BarChartRounded, CloseOutlined, C
 import ChartPopup from "../components/chart-popup";
 import { useNavigate } from "react-router";
 
-import data from '../data/mock-its.json';
+import mockData from '../data/mock-its.json';
 
 function MapPage() {
+  const [data, setData] = useState(mockData)
   const [isOpened, setIsOpened] = useState(false);
+  const [filters, setFilters] = useState({id: 0, label: "Без фильтра"}); // contains dropdown object
   const navigation = useNavigate()
 
   const markers = [
@@ -28,14 +30,86 @@ function MapPage() {
 
   const [objType, setObjType] = useState("Видео")
 
-  const newData = useMemo(() => data.filter((obj) => obj["object_type"] == objType), [objType]);
-  console.log(newData);
+  const newData = useMemo(() => data.filter((obj) => obj["object_type"] == objType), [objType, data]);
+
+  useEffect(() => {
+    if (filters.label == 'Без фильтра') {
+      var newData = data;
+      for (let i = 0; i < newData.length; i++) {
+        newData[i]["color"] = 'neutral'
+      }
+      setData(newData);
+    }
+    if (filters.label == 'По дате последнего обслуживания') {
+      let temp = data.map((obj) => {
+        return {[obj["id"]]: obj["history"].sort((a, b) => {return b["created_at"] - a["created_at"]})[0]["created_at"]};
+      });
+      let maxBound = Math.max(...(temp.flatMap(obj => Object.values(obj))));
+      let minBound = Math.min(...(temp.flatMap(obj => Object.values(obj))));
+      let diff = maxBound - minBound;
+      let threshhold = diff / 3
+      var newData = data;
+      for (let i = 0; i < newData.length; i++) {
+        if (temp[newData[i]["id"]][newData[i]["id"]] <= minBound + threshhold){
+          newData[i]["color"] = 'red'
+        } else if (temp[newData[i]["id"]][newData[i]["id"]] <= minBound + 2 * threshhold) {
+          newData[i]["color"] = 'yellow'
+        } else if (temp[newData[i]["id"]][newData[i]["id"]] <= minBound + 3 * threshhold) {
+          newData[i]["color"] = 'green'
+        }
+      }
+      setData(newData);
+    }
+    if (filters.label == 'По рейтингу истории') {
+      let temp = new Object;
+      data.forEach(obj => {
+        let numbers = obj["history"].map(hist => {return hist["score"]});
+        temp[obj["id"]] = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / numbers.length;
+      })
+      let maxBound = Math.max(...(Object.values(temp)));
+      let minBound = Math.min(...(Object.values(temp)));
+      let diff = maxBound - minBound;
+      let threshhold = diff / 3
+      var newData = data;
+      for (let i = 0; i < newData.length; i++) {
+        if (temp[newData[i]["id"]] <= minBound + threshhold){
+          newData[i]["color"] = 'red'
+        } else if (temp[newData[i]["id"]] <= minBound + 2 * threshhold) {
+          newData[i]["color"] = 'yellow'
+        } else if (temp[newData[i]["id"]] <= minBound + 3 * threshhold) {
+          newData[i]["color"] = 'green'
+        }
+      }
+      setData(newData);
+    }
+    if (filters.label == 'По рейтингу предсказания') {
+      let temp = new Object;
+      data.forEach(obj => {
+        temp[obj["id"]] = obj["score"];
+      })
+      let maxBound = Math.max(...(Object.values(temp)));
+      let minBound = Math.min(...(Object.values(temp)));
+      let diff = maxBound - minBound;
+      let threshhold = diff / 3
+      var newData = data;
+      for (let i = 0; i < newData.length; i++) {
+        if (temp[newData[i]["id"]] <= minBound + threshhold){
+          newData[i]["color"] = 'red'
+        } else if (temp[newData[i]["id"]] <= minBound + 2 * threshhold) {
+          newData[i]["color"] = 'yellow'
+        } else if (temp[newData[i]["id"]] <= minBound + 3 * threshhold) {
+          newData[i]["color"] = 'green'
+        }
+      }
+      setData(newData);
+    }
+  }, [filters])
 
   return (
     <div>
       <NavSidebar chosen={catChosen} setChosen={setCatChosen} open={mainSidebarOpen} setOpen={setMainSidebarOpen} />
-      <MainSidebar category={catChosen} open={mainSidebarOpen} objType={objType} setObjType={setObjType} />
-      <MapComponent markers={newData} currMarker={marker} setMarker={setMarker} />
+      <MainSidebar category={catChosen} open={mainSidebarOpen} objType={objType} setObjType={setObjType} filters={filters} setFilters={setFilters}/>
+      <MapComponent markers={newData} currMarker={marker} setMarker={setMarker} objType={objType} filters={filters} />
       <div className='button-container'>
         <Fab onClick={() => navigation('/profile')}>
           <AccountCircle />

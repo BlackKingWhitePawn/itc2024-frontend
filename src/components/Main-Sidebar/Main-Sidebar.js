@@ -3,10 +3,11 @@ import { ReactComponent as Logo } from '../../assets/icons/user.svg'
 import Dropdown from '../Dropdown/Dropdown';
 import { useState } from 'react';
 
-function MainSidebar({open, category, objType, setObjType}) {
-    const [filters, setFilters] = useState({id: 1, label: "По дате последнего обслуживания"}); // contains dropdown object
+function MainSidebar({open, category, objType, setObjType, filters, setFilters}) {
+    
     const [dropdownOpen, setDropdownOpen] = useState(-1); //contains id of open atm dropdown
     const filtersLabels = [
+        {id: 0, label: "Без фильтра"},
         {id: 1, label: "По дате последнего обслуживания"},
         {id: 2, label: "По рейтингу истории"},
         {id: 3, label: "По рейтингу предсказания"}

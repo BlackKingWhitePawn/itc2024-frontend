@@ -6,7 +6,51 @@ import { BarChart, BarChartOutlined, BarChartRounded } from '@mui/icons-material
 import ChartPopup from '../chart-popup';
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
 
+// ! ДА ПРОСТИТ МЕНЯ ГОСПОДЬ
 import bus from '../../assets/img/bus.png';
+import busActive from '../../assets/img/busActive.png';
+import camera from '../../assets/img/camera.png';
+import cameraActive from '../../assets/img/cameraActive.png';
+import meteo from '../../assets/img/meteo.png';
+import meteoActive from '../../assets/img/meteoActive.png';
+import svetofor from '../../assets/img/svetofor.png';
+import svetoforActive from '../../assets/img/svetoforActive.png';
+import charger from '../../assets/img/charger.png';
+import chargerActive from '../../assets/img/chargerActive.png';
+
+import busGreen from '../../assets/img/busGreen.png';
+import busActiveGreen from '../../assets/img/busActiveGreen.png';
+import cameraGreen from '../../assets/img/cameraGreen.png';
+import cameraActiveGreen from '../../assets/img/cameraActiveGreen.png';
+import meteoGreen from '../../assets/img/meteoGreen.png';
+import meteoActiveGreen from '../../assets/img/meteoActiveGreen.png';
+import svetoforGreen from '../../assets/img/svetoforGreen.png';
+import svetoforActiveGreen from '../../assets/img/svetoforActiveGreen.png';
+import chargerGreen from '../../assets/img/chargerGreen.png';
+import chargerActiveGreen from '../../assets/img/chargerActiveGreen.png';
+
+import busYellow from '../../assets/img/busYellow.png';
+import busActiveYellow from '../../assets/img/busActiveYellow.png';
+import cameraYellow from '../../assets/img/cameraYellow.png';
+import cameraActiveYellow from '../../assets/img/cameraActiveYellow.png';
+import meteoYellow from '../../assets/img/meteoYellow.png';
+import meteoActiveYellow from '../../assets/img/meteoActiveYellow.png';
+import svetoforYellow from '../../assets/img/svetoforYellow.png';
+import svetoforActiveYellow from '../../assets/img/svetoforActiveYellow.png';
+import chargerYellow from '../../assets/img/chargerYellow.png';
+import chargerActiveYellow from '../../assets/img/chargerActiveYellow.png';
+
+import busRed from '../../assets/img/busRed.png';
+import busActiveRed from '../../assets/img/busActiveRed.png';
+import cameraRed from '../../assets/img/cameraRed.png';
+import cameraActiveRed from '../../assets/img/cameraActiveRed.png';
+import meteoRed from '../../assets/img/meteoRed.png';
+import meteoActiveRed from '../../assets/img/meteoActiveRed.png';
+import svetoforRed from '../../assets/img/svetoforRed.png';
+import svetoforActiveRed from '../../assets/img/svetoforActiveRed.png';
+import chargerRed from '../../assets/img/chargerRed.png';
+import chargerActiveRed from '../../assets/img/chargerActiveRed.png';
+// ! АМИНЬ
 
 const containerStyle = {
     width: '100vw',
@@ -18,6 +62,99 @@ const center = {
     lat: 58.009473,
     lng: 56.227455
 };
+
+const icons = {
+    "Видео": {
+        "neutral": {
+            "default": camera,
+            "active": cameraActive
+        },
+        "green": {
+            "default": cameraGreen,
+            "active": cameraActiveGreen
+        },
+        "yellow": {
+            "default": cameraYellow,
+            "active": cameraActiveYellow
+        },
+        "red": {
+            "default": cameraRed,
+            "active": cameraActiveRed
+        }
+    },
+    "Метео": {
+        "neutral": {
+            "default": meteo,
+            "active": meteoActive
+        },
+        "green": {
+            "default": meteoGreen,
+            "active": meteoActiveGreen
+        },
+        "yellow": {
+            "default": meteoYellow,
+            "active": meteoActiveYellow
+        },
+        "red": {
+            "default": meteoRed,
+            "active": meteoActiveRed
+        }
+    },
+    "Остановка": {
+        "neutral": {
+            "default": bus,
+            "active": busActive
+        },
+        "green": {
+            "default": busGreen,
+            "active": busActiveGreen
+        },
+        "yellow": {
+            "default": busYellow,
+            "active": busActiveYellow
+        },
+        "red": {
+            "default": busRed,
+            "active": busActiveRed
+        }
+    },
+    "Светофор": {
+        "neutral": {
+            "default": svetofor,
+            "active": svetoforActive
+        },
+        "green": {
+            "default": svetoforGreen,
+            "active": svetoforActiveGreen
+        },
+        "yellow": {
+            "default": svetoforYellow,
+            "active": svetoforActiveYellow
+        },
+        "red": {
+            "default": svetoforRed,
+            "active": svetoforActiveRed
+        }
+    },
+    "ЭЗС": {
+        "neutral": {
+            "default": charger,
+            "active": chargerActive
+        },
+        "green": {
+            "default": chargerGreen,
+            "active": chargerActiveGreen
+        },
+        "yellow": {
+            "default": chargerYellow,
+            "active": chargerActiveYellow
+        },
+        "red": {
+            "default": chargerRed,
+            "active": chargerActiveRed
+        }
+    },
+}
 
 class LoadScriptOnlyIfNeeded extends LoadScript {
     componentDidMount() {
@@ -40,7 +177,7 @@ class LoadScriptOnlyIfNeeded extends LoadScript {
     }
   }
 
-const MapComponent = ({ markers, currMarker, setMarker }) => {
+const MapComponent = ({ markers, currMarker, setMarker, objType, filters }) => {
     const mapRef = useRef(null);
     const markersRef = useRef([]);
     const markerClustererRef = useRef(null);
@@ -132,21 +269,27 @@ const MapComponent = ({ markers, currMarker, setMarker }) => {
 
           markerClustererRef.current = new MarkerClusterer({ map, newMarkers, styles });
             markers.forEach(marker => {
-                console.log("BRUH")
+                console.log(marker["id"], currMarker)
                 const newMarker = new window.google.maps.Marker({
                     map: mapRef.current,
                     position: new window.google.maps.LatLng(marker["coords"]["lat"], marker["coords"]["lon"]),
                     icon: {
-                        url: bus,
+                        url: icons[objType][marker["color"]][currMarker == marker["id"] ? "active" : "default"],
                         scaledSize: new window.google.maps.Size(40, 40),
                     }
                     
                 });
+                newMarker.addListener('click', () => {
+                    setMarker(marker["id"])
+                })
                 markerClustererRef.current.addMarker(newMarker);
             })
                 markerClustererRef.current.render();
             }
-     }, [mapRef.current, loaded, markers]);
+     }, [mapRef.current, loaded, markers, currMarker, filters]);
+
+     console.log('ello', currMarker);
+
     return (
         <LoadScriptOnlyIfNeeded
             googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
