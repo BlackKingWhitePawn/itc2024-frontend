@@ -1,6 +1,6 @@
 import MapComponent from "../components/Map/Map";
 import NavSidebar from "../components/Nav-Sidebar/Nav-Sidebar";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import './map-page.scss'
 import user from '../assets/icons/user.svg'
 import MainSidebar from "../components/Main-Sidebar/Main-Sidebar";
@@ -8,6 +8,8 @@ import { Fab } from "@mui/material";
 import { AccountCircle, AccountCircleOutlined, BarChartRounded, CloseOutlined, CloseRounded } from "@mui/icons-material";
 import ChartPopup from "../components/chart-popup";
 import { useNavigate } from "react-router";
+
+import data from '../data/mock-its.json';
 
 function MapPage() {
   const [isOpened, setIsOpened] = useState(false);
@@ -23,11 +25,17 @@ function MapPage() {
 
   const [catChosen, setCatChosen] = useState(1);
 
+
+  const [objType, setObjType] = useState("Видео")
+
+  const newData = useMemo(() => data.filter((obj) => obj["object_type"] == objType), [objType]);
+  console.log(newData);
+
   return (
     <div>
       <NavSidebar chosen={catChosen} setChosen={setCatChosen} open={mainSidebarOpen} setOpen={setMainSidebarOpen} />
-      <MainSidebar category={catChosen} open={mainSidebarOpen} />
-      <MapComponent markers={markers} currMarker={marker} setMarker={setMarker} />
+      <MainSidebar category={catChosen} open={mainSidebarOpen} objType={objType} setObjType={setObjType} />
+      <MapComponent markers={newData} currMarker={marker} setMarker={setMarker} />
       <div className='button-container'>
         <Fab onClick={() => navigation('/profile')}>
           <AccountCircle />

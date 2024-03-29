@@ -106,19 +106,18 @@ const MapComponent = ({ markers, currMarker, setMarker }) => {
             mapRef.current.setZoom(mapRef.current.getZoom() - 1);
         }
     };
-
-    // useEffect(() => {
-    //     // Check if the Google Maps API script is already loaded
-    //     if (!window.google || !window.google.maps) {
-    //       // Load the Google Maps API script
-    //       const script = document.createElement('script');
-    //       script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&callback=initMap`;
-    //       script.async = true;
-    //       script.defer = true;
-    //       document.body.appendChild(script);
-    //     }
-    //  }, []);
-    // if (window.google === undefined)
+    const [visibleMarkers, setVisibleMarkers] = useState([]);
+    useEffect(() => {
+        if (mapRef.current) {
+          const map = mapRef.current;
+          const bounds = map.getBounds();
+          const visibleMarkers = markers.filter(mark => {
+            const markerLatLng = new window.google.maps.LatLng(mark["coords"]["lat"], mark["coords"]["lon"]);
+            return bounds.contains(markerLatLng);
+          });
+          setVisibleMarkers(visibleMarkers);
+        }
+     }, [mapRef.current]);
     return (
         <LoadScriptOnlyIfNeeded
             googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
@@ -142,26 +141,34 @@ const MapComponent = ({ markers, currMarker, setMarker }) => {
                     draw();
                 }}
                 onClick={() => setMarker(-1)}
+                onBoundsChange={() => {
+                    const map = mapRef.current;
+                    const bounds = map.getBounds();
+                    const visibleMarkers = markers.filter(mark => {
+                      const markerLatLng = new window.google.maps.LatLng(mark["coords"]["lat"], mark["coords"]["lon"]);
+                      return bounds.contains(markerLatLng);
+                    });
+                    setVisibleMarkers(visibleMarkers);
+                  }}
 
             >
-                {loaded && markers.map((mark) => {
-                    return <Marker
-                        position={{ lat: mark.lat, lng: mark.lng }}
+                {loaded && visibleMarkers.map((mark) => (
+                    <Marker
+                        key={mark.id}
+                        position={{ lat: mark["coords"]["lat"], lng: mark["coords"]["lon"] }}
                         icon={{
-                            url: 'https://4x4photo.ru/wp-content/uploads/2023/05/4df0de19-e32a-491c-bcab-0d849f3cff9a.jpg',
-                            scaledSize: new window.google.maps.Size(60, 60),
+                        url: 'https://4x4photo.ru/wp-content/uploads/2023/05/4df0de19-e32a-491c-bcab-0d849f3cff9a.jpg',
+                        scaledSize: new window.google.maps.Size(60, 60),
                         }}
                         label={currMarker == mark.id ? {
-                            text: "Выбран",
-                            fontSize: "20px",
-                            fontWeight: "600",
-                            color: "#F00"
+                        text: "Выбран",
+                        fontSize: "20px",
+                        fontWeight: "600",
+                        color: "#F00"
                         } : { text: " " }}
                         onClick={() => setMarker(mark.id)}
-
                     />
-                })
-                }
+                    ))}
             </GoogleMap>
             <div style={{
                 position: 'absolute',
