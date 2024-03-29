@@ -33,7 +33,7 @@ function SecondSidebar({data}) {
             <h1>История обслуживания:</h1>
             {data["history"].map(hist => {
                 return(
-                    <div>
+                    <div className={(hist["type"]=="regular") ? 'type-island-regular' : 'type-island-incident'}>
                         <p>Тип работ: {hist["type"]}</p>
                         {hist["type"] != "regular" ? <p>Описание: {hist["description"]}</p> : <></>}
                         <p>id подрядчика: {hist["assigner_id"]}</p>
