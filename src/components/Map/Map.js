@@ -192,7 +192,7 @@ const MapComponent = ({ markers, currMarker, setMarker, objType, filters }) => {
             });
 
             if (!response.ok) {
-                console.log(response);
+                // console.log(response);
                 // throw new Error('Network response was not ok');
             }
 
@@ -269,7 +269,6 @@ const MapComponent = ({ markers, currMarker, setMarker, objType, filters }) => {
 
           markerClustererRef.current = new MarkerClusterer({ map, newMarkers, styles });
             markers.forEach(marker => {
-                console.log(marker["id"], currMarker)
                 const newMarker = new window.google.maps.Marker({
                     map: mapRef.current,
                     position: new window.google.maps.LatLng(marker["coords"]["lat"], marker["coords"]["lon"]),
@@ -286,9 +285,8 @@ const MapComponent = ({ markers, currMarker, setMarker, objType, filters }) => {
             })
                 markerClustererRef.current.render();
             }
-     }, [mapRef.current, loaded, markers, currMarker, filters]);
+     }, [mapRef.current, loaded, markers, currMarker]);
 
-     console.log('ello', currMarker);
 
     return (
         <LoadScriptOnlyIfNeeded

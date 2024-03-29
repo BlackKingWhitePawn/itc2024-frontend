@@ -1,0 +1,35 @@
+.second-sidebar {
+    --main-width: 15vw;
+    position: fixed;
+    right: 5vw;
+    top: 5vh;
+    height: 90vh;
+    width: var(--main-width);
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgba($color: #FFF, $alpha: 0.8);
+    z-index: 10;
+    border-radius: 20px;
+    overflow-y: auto;
+    animation: ease-in-out .2s sidebarOpened forwards;
+
+    h1 {
+        font-size: 30px;
+        font-weight: 400;
+        text-align: center;
+    }
+}
+
+@keyframes sidebarOpened {
+    from {
+        width: 0px;
+        padding: 0px;
+        opacity: 0;
+    }
+    to {
+        width: var(--main-width);
+        padding-left: 10px;
+        padding-right: 10px;
+        opacity: 1;
+    }
+}
