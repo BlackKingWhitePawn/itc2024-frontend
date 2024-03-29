@@ -230,7 +230,19 @@ function CompanyPage() {
                         {resolveTitle()}
                         <Button variant='text' onClick={() => setSelectedChart(Math.abs(selectedChart - 1))}>{titles[Math.abs(selectedChart - 1)]}</Button>
                     </Stack>
-                    <ChartLine data={dataset[selectedChart]} height={500} title='Функция выживаемости' />
+                    <ChartLine
+                        data={dataset[selectedChart]}
+                        height={500}
+                        title='Функция выживаемости'
+                        xAxis={[{
+                            data: dataset[selectedChart].x,
+                            label: 'Дни',
+                        }]}
+                        yAxis={[{
+                            data: dataset[selectedChart].ys,
+                            label: 'Вероятность',
+                        }]}
+                    />
                 </Grid>
             </Grid>
         </Layout>
