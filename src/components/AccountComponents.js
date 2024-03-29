@@ -6,33 +6,6 @@ import Layout from './layout'
 import { Card, CardHeader, CardContent } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const Accounts = [
-  {
-    id: 'Accoint1',
-    amount: 5,
-  },
-  {
-    id: 'Accoint2',
-    amount: 25,
-  },
-  {
-    id: 'Accoint3',
-    amount: 35,
-  },
-  {
-    id: 'Accoint4',
-    amount: 15,
-  },
-  {
-    id: 'Accoint5',
-    amount: 54,
-  },
-  {
-    id: 'Accoint6',
-    amount: 55,
-  }
-];
-
 export default function AccountComponents({ accounts }) {
   const navigate = useNavigate()
   const pageName = "Аккаунты"
@@ -52,7 +25,7 @@ export default function AccountComponents({ accounts }) {
               }}
             >
               <CardHeader style={{ backgroundColor: "#D76223", border: "0px", borderRadius: "10px", color: "#FFFFFF", boxShadow: "0px 4px 4px rgba(0,0,0,0.2)", height: "38px" }}
-                title={account.id}
+                title={"Account " + account.id}
               />
               <CardContent>
                 <Typography variant="body2" color="text.secondary">

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
+import { Typography } from '@mui/material';
 
 
 /**
@@ -24,23 +25,31 @@ import { LineChart } from '@mui/x-charts/LineChart';
  * ```
  * @return {ReactElement} The rendered line chart component.
  */
-export default function ChartLine({ data, ...props }) {
+export default function ChartLine({ data, title, ...props }) {
+    function resolveTitle() {
+        if (title) return <Typography style={{ marginLeft: '16px' }} variant='h5'>{title}</Typography> // title
+        return <Typography style={{ marginLeft: '16px' }} variant='h5'>Функция выживаемости</Typography>
+    }
+
     if (!data.ys) return (
-        <LineChart
-            xAxis={[{ data: data.x }]}
-            series={[
-                { data: data.y }
-            ]}
-            height={300}
-            {...props}
-        />
+        <>
+            <LineChart
+                xAxis={[{ data: data.x }]}
+                series={[
+                    { type: 'line', data: data.y, label: 'Функция выживаемости' },
+                ]}
+                height={300}
+                {...props}
+            />
+        </>
     );
 
-    if (Array.isArray(data.ys)) return <LineChart
-        height={300}
-        xAxis={[{ data: data.x }]}
-        series={data.ys.map((v) => ({ data: v }))}
-        grid={{ horizontal: true, vertical: true }}
-        {...props}
-    />
+    if (Array.isArray(data.ys)) return <>
+        <LineChart
+            height={300}
+            xAxis={[{ data: data.x }]}
+            series={data.ys.map((v) => ({ data: v }))}
+            grid={{ horizontal: true, vertical: true }}
+            {...props}
+        /></>
 }
