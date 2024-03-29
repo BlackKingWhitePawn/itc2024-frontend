@@ -34,19 +34,26 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
 
   const resolveTable = () => {
     return <DataGrid
-      columns={[
-        { field: 'id', headerName: 'ID' },
-        { field: 'object_type', headerName: 'Тип', flex: 1 },
-        { field: 'score', headerName: 'Оценка' },
-        { field: 'cords', headerName: 'Координаты', flex: 1 },
-      ]}
-      rows={mockData.map((data) => ({
-        id: data.id,
-        object_type: data.object_type,
-        score: data.score,
-        cords: `${data.coords.lat.toFixed(6)}, ${data.coords.lon.toFixed(6)}`
-      }))}
-      style={{ width: '100%' }}
+      onRowClick={console.log}
+      columns={
+        [
+          { field: 'id', headerName: 'ID' },
+          { field: 'object_type', headerName: 'Тип', flex: 1 },
+          { field: 'customer_id', headerName: 'Подрядчик' },
+          { field: 'score', headerName: 'Оценка', flex: 1 },
+          { field: 'cords', headerName: 'Координаты', flex: 1 },
+        ]}
+      rows={
+        mockData.map((data) => ({
+          id: data.id,
+          object_type: data.object_type,
+          customer_id: data.customer_id,
+          score: (data.history.reduce((accumulator, currentValue) => accumulator + currentValue.score, 0) / data.history.length * 10).toFixed(1),
+          cords: `${data.coords.lat.toFixed(6)}, ${data.coords.lon.toFixed(6)}`
+        }))
+      }
+      style={{ width: '100%' }
+      }
       initialState={{
         pagination: {
           paginationModel: { page: 0, pageSize: 5 },
