@@ -9,12 +9,12 @@ import { AccountCircle, AccountCircleOutlined, BarChartRounded, CloseOutlined, C
 import ChartPopup from "../components/chart-popup";
 import { useNavigate } from "react-router";
 
-import mockData from '../data/mock-its.json';
+import mockData from '../data/mock-its';
 
 function MapPage() {
   const [data, setData] = useState(mockData)
   const [isOpened, setIsOpened] = useState(false);
-  const [filters, setFilters] = useState({id: 0, label: "Без фильтра"}); // contains dropdown object
+  const [filters, setFilters] = useState({ id: 0, label: "Без фильтра" }); // contains dropdown object
   const navigation = useNavigate()
 
   const markers = [
@@ -42,7 +42,7 @@ function MapPage() {
     }
     if (filters.label == 'По дате последнего обслуживания') {
       let temp = data.map((obj) => {
-        return {[obj["id"]]: obj["history"].sort((a, b) => {return b["created_at"] - a["created_at"]})[0]["created_at"]};
+        return { [obj["id"]]: obj["history"].sort((a, b) => { return b["created_at"] - a["created_at"] })[0]["created_at"] };
       });
       let maxBound = Math.max(...(temp.flatMap(obj => Object.values(obj))));
       let minBound = Math.min(...(temp.flatMap(obj => Object.values(obj))));
@@ -50,7 +50,7 @@ function MapPage() {
       let threshhold = diff / 3
       var newData = data;
       for (let i = 0; i < newData.length; i++) {
-        if (temp[newData[i]["id"]][newData[i]["id"]] <= minBound + threshhold){
+        if (temp[newData[i]["id"]][newData[i]["id"]] <= minBound + threshhold) {
           newData[i]["color"] = 'red'
         } else if (temp[newData[i]["id"]][newData[i]["id"]] <= minBound + 2 * threshhold) {
           newData[i]["color"] = 'yellow'
@@ -63,7 +63,7 @@ function MapPage() {
     if (filters.label == 'По рейтингу истории') {
       let temp = new Object;
       data.forEach(obj => {
-        let numbers = obj["history"].map(hist => {return hist["score"]});
+        let numbers = obj["history"].map(hist => { return hist["score"] });
         temp[obj["id"]] = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / numbers.length;
       })
       let maxBound = Math.max(...(Object.values(temp)));
@@ -72,7 +72,7 @@ function MapPage() {
       let threshhold = diff / 3
       var newData = data;
       for (let i = 0; i < newData.length; i++) {
-        if (temp[newData[i]["id"]] <= minBound + threshhold){
+        if (temp[newData[i]["id"]] <= minBound + threshhold) {
           newData[i]["color"] = 'red'
         } else if (temp[newData[i]["id"]] <= minBound + 2 * threshhold) {
           newData[i]["color"] = 'yellow'
@@ -93,7 +93,7 @@ function MapPage() {
       let threshhold = diff / 3
       var newData = data;
       for (let i = 0; i < newData.length; i++) {
-        if (temp[newData[i]["id"]] <= minBound + threshhold){
+        if (temp[newData[i]["id"]] <= minBound + threshhold) {
           newData[i]["color"] = 'red'
         } else if (temp[newData[i]["id"]] <= minBound + 2 * threshhold) {
           newData[i]["color"] = 'yellow'
@@ -108,7 +108,7 @@ function MapPage() {
   return (
     <div>
       <NavSidebar chosen={catChosen} setChosen={setCatChosen} open={mainSidebarOpen} setOpen={setMainSidebarOpen} />
-      <MainSidebar category={catChosen} open={mainSidebarOpen} objType={objType} setObjType={setObjType} filters={filters} setFilters={setFilters}/>
+      <MainSidebar category={catChosen} open={mainSidebarOpen} objType={objType} setObjType={setObjType} filters={filters} setFilters={setFilters} />
       <MapComponent markers={newData} currMarker={marker} setMarker={setMarker} objType={objType} filters={filters} />
       <div className='button-container'>
         <Fab onClick={() => navigation('/profile')}>
@@ -119,7 +119,13 @@ function MapPage() {
         </Fab>
       </div>
       <div className="bottom-popup-container">
-        <ChartPopup isOpened={isOpened} setIsOpened={setIsOpened} isCollapsed={mainSidebarOpen} />
+        <ChartPopup
+          isOpened={isOpened}
+          setIsOpened={setIsOpened}
+          isCollapsed={mainSidebarOpen}
+          catChosen={catChosen}
+          setCatChosen={setCatChosen}
+        />
       </div>
     </div>
   );
