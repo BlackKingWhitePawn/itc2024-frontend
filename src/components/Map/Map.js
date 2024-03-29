@@ -4,6 +4,9 @@ import './Map.scss'
 import { Fab } from '@mui/material';
 import { BarChart, BarChartOutlined, BarChartRounded } from '@mui/icons-material';
 import ChartPopup from '../chart-popup';
+import { MarkerClusterer } from "@googlemaps/markerclusterer";
+
+import bus from '../../assets/img/bus.png';
 
 const containerStyle = {
     width: '100vw',
@@ -39,6 +42,8 @@ class LoadScriptOnlyIfNeeded extends LoadScript {
 
 const MapComponent = ({ markers, currMarker, setMarker }) => {
     const mapRef = useRef(null);
+    const markersRef = useRef([]);
+    const markerClustererRef = useRef(null);
     const zoomInButtonRef = useRef(null);
     const zoomOutButtonRef = useRef(null);
     const [markerClicked, setMarkerClicked] = useState(false);
@@ -106,23 +111,46 @@ const MapComponent = ({ markers, currMarker, setMarker }) => {
             mapRef.current.setZoom(mapRef.current.getZoom() - 1);
         }
     };
-    const [visibleMarkers, setVisibleMarkers] = useState([]);
     useEffect(() => {
         if (mapRef.current) {
           const map = mapRef.current;
-          const bounds = map.getBounds();
-          const visibleMarkers = markers.filter(mark => {
-            const markerLatLng = new window.google.maps.LatLng(mark["coords"]["lat"], mark["coords"]["lon"]);
-            return bounds.contains(markerLatLng);
-          });
-          setVisibleMarkers(visibleMarkers);
-        }
-     }, [mapRef.current]);
+          const newMarkers = markersRef.current;
+    
+          const styles = [
+            {
+              url: 'https://4x4photo.ru/wp-content/uploads/2023/05/4df0de19-e32a-491c-bcab-0d849f3cff9a.jpg',
+              height: 60,
+              width: 60,
+              textColor: '#ffffff',
+              textSize: 10,
+            },
+          ];
+
+          if (markerClustererRef.current) {
+            markerClustererRef.current.clearMarkers();
+          }
+
+          markerClustererRef.current = new MarkerClusterer({ map, newMarkers, styles });
+            markers.forEach(marker => {
+                console.log("BRUH")
+                const newMarker = new window.google.maps.Marker({
+                    map: mapRef.current,
+                    position: new window.google.maps.LatLng(marker["coords"]["lat"], marker["coords"]["lon"]),
+                    icon: {
+                        url: bus,
+                        scaledSize: new window.google.maps.Size(40, 40),
+                    }
+                    
+                });
+                markerClustererRef.current.addMarker(newMarker);
+            })
+                markerClustererRef.current.render();
+            }
+     }, [mapRef.current, loaded, markers]);
     return (
         <LoadScriptOnlyIfNeeded
             googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         >
-        {/* // <div> */}
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
@@ -141,34 +169,7 @@ const MapComponent = ({ markers, currMarker, setMarker }) => {
                     draw();
                 }}
                 onClick={() => setMarker(-1)}
-                onBoundsChange={() => {
-                    const map = mapRef.current;
-                    const bounds = map.getBounds();
-                    const visibleMarkers = markers.filter(mark => {
-                      const markerLatLng = new window.google.maps.LatLng(mark["coords"]["lat"], mark["coords"]["lon"]);
-                      return bounds.contains(markerLatLng);
-                    });
-                    setVisibleMarkers(visibleMarkers);
-                  }}
-
             >
-                {loaded && visibleMarkers.map((mark) => (
-                    <Marker
-                        key={mark.id}
-                        position={{ lat: mark["coords"]["lat"], lng: mark["coords"]["lon"] }}
-                        icon={{
-                        url: 'https://4x4photo.ru/wp-content/uploads/2023/05/4df0de19-e32a-491c-bcab-0d849f3cff9a.jpg',
-                        scaledSize: new window.google.maps.Size(60, 60),
-                        }}
-                        label={currMarker == mark.id ? {
-                        text: "Выбран",
-                        fontSize: "20px",
-                        fontWeight: "600",
-                        color: "#F00"
-                        } : { text: " " }}
-                        onClick={() => setMarker(mark.id)}
-                    />
-                    ))}
             </GoogleMap>
             <div style={{
                 position: 'absolute',
