@@ -47,7 +47,6 @@ export default function ChartPopup({ isOpened, setIsOpened, isCollapsed, catChos
         cords: `${data.coords.lat.toFixed(6)}, ${data.coords.lon.toFixed(6)}`
       }))}
       style={{ width: '100%' }}
-      pageSizeOptions={[5, 10]}
       initialState={{
         pagination: {
           paginationModel: { page: 0, pageSize: 5 },
