@@ -21,7 +21,7 @@ import { MainListItems, getSecondaryListItems } from './reusable/listItems';
 import { ProfileEdit } from './ProfileEdit';
 import { ProfileCard } from './ProfileCard';
 import logotip from "../assets/icons/logotip.svg"
-import { Avatar, Card, CardHeader, CardContent } from '@mui/material';
+import { Avatar, Card, CardHeader, CardContent, CircularProgress } from '@mui/material';
 
 import { Breadcrumbs, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -105,7 +105,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-const Layout = observer(({ children, pageName }) => {
+const Layout = observer(({ children, pageName, loaded = true }) => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -225,7 +225,9 @@ const Layout = observer(({ children, pageName }) => {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            {children}
+            {loaded ? children : <Grid width={"100%"} height={"100%"} container justifyContent="center" alignItems="center">
+              <CircularProgress />
+            </Grid>}
           </Container>
         </Box>
       </Box>

@@ -207,7 +207,7 @@ function CompanyPage() {
     }
 
     return (
-        <Layout pageName={companyData?.name}>
+        <Layout pageName={companyData?.name} loaded={!!companyData}>
             <BreadcrumbsNavigation items={[
                 { name: 'Структура', path: '/accounts' },
                 // TODO: получать айди динамически из ответа
