@@ -6,6 +6,7 @@
 
 - **react v18**
 - react-router-dom v6
+- react-google-maps
 - mobx v6
 - mui v5
 - sass v1
